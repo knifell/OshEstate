@@ -50,7 +50,6 @@
             border: 1px solid #e9ecef;
             border-radius: 20px;
             outline: none;
-            font-size: 16px; /* iOS не зумит */
         }
         
         .chat-list {
@@ -136,9 +135,7 @@
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            overflow-x: hidden;
             background: #f8f9fa;
-            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
         }
         
         .message {
@@ -194,7 +191,6 @@
             border-radius: 25px;
             outline: none;
             resize: none;
-            font-size: 16px; /* iOS не зумит */
         }
         
         .chat-send-btn {
@@ -248,58 +244,19 @@
         @media (max-width: 768px) {
             .chat-container {
                 flex-direction: column;
-                height: calc(100dvh - 60px); /* dvh учитывает виртуальную клавиатуру */
-                margin: 0;
-                border-radius: 0;
+                height: calc(100vh - 120px);
             }
-
+            
             .chat-sidebar {
                 width: 100%;
-                height: 280px;
+                height: 300px;
                 border-right: none;
                 border-bottom: 1px solid #e9ecef;
             }
-
-            .chat-main {
-                flex: 1;
-                min-height: 0; /* Важно для flex-скролла */
-                display: flex;
-                flex-direction: column;
-            }
-
-            .chat-messages {
-                flex: 1;
-                min-height: 0;
-                padding: 12px;
-                padding-bottom: 8px; /* Меньше снизу, чтобы поле ввода было видно */
-            }
-
-            .chat-input-container {
-                padding: 12px 14px;
-                padding-bottom: max(16px, env(safe-area-inset-bottom, 16px)); /* Больше снизу для iOS */
-                background: white;
-                border-top: 1px solid #e9ecef;
-                flex-shrink: 0; /* Не сжимать */
-            }
-
+            
             .message-bubble {
                 max-width: 85%;
             }
-        }
-
-        /* iOS keyboard fix */
-        @supports (-webkit-touch-callout: none) {
-            @media (max-width: 768px) {
-                .chat-container {
-                    height: 100dvh;
-                    height: -webkit-fill-available;
-                }
-            }
-        }
-
-        /* Скрываем подвал на странице чата */
-        footer {
-            display: none !important;
         }
     </style>
 </head>

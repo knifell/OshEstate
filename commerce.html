@@ -47,7 +47,6 @@
                 <div class="fbar-search">
                     <i class="fas fa-search"></i>
                     <input type="text" id="searchInput" placeholder="Адрес, район, описание...">
-                    <div id="searchDropdown" class="search-dropdown" style="display:none;"></div>
                 </div>
                 <select id="sortSelect" class="fbar-sort">
                     <option value="new">Сначала новые</option>
@@ -62,9 +61,17 @@
             <div class="fbar-panel" id="fbarPanel">
                 <div class="fbar-grid">
                     <div class="fbar-field">
-                        <label class="fbar-label">Регион / район</label>
+                        <label class="fbar-label">Район</label>
                         <select id="districtFilter" class="fbar-select">
-                            <option value="">Все регионы</option>
+                            <option value="">Все районы</option>
+                            <option value="center">Центр</option>
+                            <option value="maydan">Площадь Ленина</option>
+                            <option value="jibek">Жибек Жолу</option>
+                            <option value="tunguch">Тунгуч</option>
+                            <option value="batyra">Батыра</option>
+                            <option value="kurmanjan">Курманжан Датка</option>
+                            <option value="massa">Масса</option>
+                            <option value="kenesh">Кенеш</option>
                         </select>
                     </div>
                     <div class="fbar-field fbar-field--wide">

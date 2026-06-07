@@ -99,18 +99,12 @@
                     </div>
                     <div class="form-group" id="roomsGroup">
                         <label>Комнат</label>
-                        <div class="fbar-segmented" id="roomsSegControl" role="group">
-                            <button type="button" class="fbar-seg-btn active" data-val="1">1</button>
-                            <button type="button" class="fbar-seg-btn" data-val="2">2</button>
-                            <button type="button" class="fbar-seg-btn" data-val="3">3</button>
-                            <button type="button" class="fbar-seg-btn" data-val="4+">4+</button>
-                        </div>
-                        <input type="hidden" id="inputRooms" value="1">
+                        <input type="number" id="inputRooms" value="1" min="1">
                     </div>
                 </div>
 
                 <!-- Дополнительные поля для квартир и домов -->
-                <div id="flatFields" style="display:none;">
+                <div id="flatHouseFields" style="display:none;">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Этаж</label>
@@ -132,71 +126,17 @@
                     </div>
                 </div>
 
-                
-                <!-- Дополнительные поля для домов -->
-                <div id="houseFields" style="display:none;">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Площадь участка (сотки)</label>
-                            <input type="number" id="inputLandArea" min="0" step="0.1" placeholder="Напр: 5">
-                        </div>
-                        <div class="form-group">
-                            <label>Тип дома</label>
-                            <select id="inputHouseType">
-                                <option value="">Не указано</option>
-                                <option value="brick">Кирпичный</option>
-                                <option value="block">Блочный</option>
-                                <option value="wood">Деревянный</option>
-                                <option value="monolithic">Монолитный</option>
-                                <option value="panel">Панельный</option>
-                                <option value="other">Другой</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Коммуникации</label>
-                            <div class="check-grid" id="inputHouseUtilitiesGroup">
-                                <label class="check-pill"><input type="checkbox" value="water"> Вода</label>
-                                <label class="check-pill"><input type="checkbox" value="electricity"> Электричество</label>
-                                <label class="check-pill"><input type="checkbox" value="gas"> Газ</label>
-                                <label class="check-pill"><input type="checkbox" value="sewage"> Канализация</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Дополнительно</label>
-                            <div class="check-grid" id="inputHouseExtrasGroup">
-                                <label class="check-pill"><input type="checkbox" value="garage"> Гараж</label>
-                                <label class="check-pill"><input type="checkbox" value="bathhouse"> Баня</label>
-                                <label class="check-pill"><input type="checkbox" value="fence"> Забор</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-<!-- Дополнительные поля для участков -->
+                <!-- Дополнительные поля для участков -->
                 <div id="landFields" style="display:none;">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Назначение участка</label>
-                            <select id="inputLandPurpose">
-                                <option value="">Не указано</option>
-                                <option value="residential">ИЖС (под жилой дом)</option>
-                                <option value="garden">Дача / садоводство</option>
-                                <option value="agricultural">Сельхозназначение</option>
-                                <option value="commercial">Коммерческое</option>
-                                <option value="industrial">Промышленное</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Коммуникации</label>
-                            <div class="check-grid" id="inputUtilitiesGroup">
-                                <label class="check-pill"><input type="checkbox" value="water"> Вода</label>
-                                <label class="check-pill"><input type="checkbox" value="electricity"> Электричество</label>
-                                <label class="check-pill"><input type="checkbox" value="gas"> Газ</label>
-                                <label class="check-pill"><input type="checkbox" value="sewage"> Канализация</label>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>Назначение участка</label>
+                        <select id="inputLandPurpose">
+                            <option value="">Не указано</option>
+                            <option value="izhs">ИЖС (под жилой дом)</option>
+                            <option value="dacha">Дача / садоводство</option>
+                            <option value="selhoz">Сельхозназначение</option>
+                            <option value="commerce">Коммерческое</option>
+                        </select>
                     </div>
                 </div>
 
@@ -223,39 +163,13 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <div class="fbar-label-row">
-                            <label>Цена <span id="inputPriceCurLabel">(сом)</span></label>
-                            <div class="fbar-currency-toggle" id="inputCurrencyToggle">
-                                <button type="button" class="fbar-cur-btn active" data-cur="KGS">сом</button>
-                                <button type="button" class="fbar-cur-btn" data-cur="USD">$</button>
-                            </div>
-                        </div>
+                        <label>Цена (сом)</label>
                         <input type="number" id="inputPrice" placeholder="0" required>
-                        <input type="hidden" id="inputCurrency" value="KGS">
                     </div>
                     <div class="form-group">
                         <label>Площадь (м²)</label>
                         <input type="number" id="inputArea" placeholder="0" required>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Документы <span style="color:#888;font-weight:400;font-size:.85em;">(можно выбрать несколько)</span></label>
-                    <div class="check-grid" id="inputDocumentsGroup">
-                        <label class="check-pill"><input type="checkbox" value="red_book"> Красная книга</label>
-                        <label class="check-pill"><input type="checkbox" value="tech_passport"> Техпаспорт</label>
-                        <label class="check-pill"><input type="checkbox" value="dkp"> ДКП</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Регион и населённый пункт</label>
-                    <button type="button" id="addRegionBtn" class="region-filter-btn" style="width:100%;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                        <span class="rf-btn-label"><i class="fas fa-map-marker-alt" style="color:#ff6b35;margin-right:6px;"></i>Выбрать регион и район</span>
-                        <i class="fas fa-chevron-down" style="opacity:.6;"></i>
-                    </button>
-                    <input type="hidden" id="inputRegion" value="">
-                    <input type="hidden" id="inputDistrict" value="">
                 </div>
 
                 <div class="form-group" style="position: relative;">
@@ -273,7 +187,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Фотографии объекта <span style="color:#e74c3c;">*</span> <span style="color:#888;font-weight:400;font-size:.85em;">(минимум 1, максимум 5)</span></label>
+                    <label>Фотографии объекта (Макс. 5)</label>
                     <input type="file" id="inputImageFile" accept="image/*" multiple style="padding: 10px; background: #f9f9f9; border: 1px dashed #ccc;">
                     <div id="imagePreviewContainer" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;"></div>
                 </div>
@@ -284,18 +198,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Контактный номер <span style="color:#e74c3c;">*</span></label>
+                    <label>Основной номер</label>
                     <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                        <input type="tel" id="inputPhone" placeholder="+996 555 123 456" required
-                               inputmode="tel" autocomplete="tel"
-                               style="flex:1; min-width:160px;">
+                        <input type="text" id="inputPhone" readonly style="background:#f5f5f5; cursor:not-allowed; flex:1; min-width:160px;">
                         <select id="inputPhoneType" style="width:175px;">
                             <option value="both">📞 Звонок + WhatsApp</option>
                             <option value="call">📞 Только звонок</option>
                             <option value="whatsapp">💬 Только WhatsApp</option>
                         </select>
                     </div>
-                    <small style="color:#999;">Можно указать другой номер, отличный от номера аккаунта. Выберите способ связи.</small>
+                    <small style="color:#999;">Номер привязан к аккаунту. Выберите способ связи.</small>
                 </div>
 
                 <button type="submit" class="btn-submit">Опубликовать</button>
@@ -304,16 +216,111 @@
         </div>
     </div>
 
-    <!-- Модалка выбора пакета (рендерится из JS) -->
-    <div id="packageModal" class="pkg-modal" style="display:none;">
-        <div class="pkg-backdrop"></div>
-        <div class="pkg-sheet"></div>
+    <!-- Модальное окно выбора пакета размещения -->
+    <div id="packageModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:3000; align-items:flex-start; justify-content:center; overflow-y:auto; padding:30px 16px;">
+        <div style="background:white; border-radius:22px; padding:36px 32px; max-width:680px; width:100%; position:relative; margin:auto; box-shadow:0 24px 60px rgba(0,0,0,0.25);">
+            <button class="pkg-close" style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.8rem;cursor:pointer;color:#bbb;line-height:1;">&times;</button>
+            <h3 style="margin:0 0 6px; text-align:center; color:#1a2b3c; font-size:1.4rem;">Выберите пакет размещения</h3>
+            <p style="text-align:center; color:#888; margin:0 0 28px; font-size:0.95rem;">Объявление готово — выберите как его разместить</p>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(175px,1fr)); gap:16px;">
+
+                <!-- СТАНДАРТ -->
+                <div style="border:2px solid #e0e0e0; border-radius:16px; padding:24px 18px; text-align:center; display:flex; flex-direction:column;">
+                    <div style="font-size:2.2rem; margin-bottom:10px;">🆓</div>
+                    <div style="font-weight:700; font-size:1.05rem; color:#1a2b3c; margin-bottom:4px;">Стандарт</div>
+                    <div style="color:#27ae60; font-size:1.5rem; font-weight:800; margin-bottom:14px;">Бесплатно</div>
+                    <ul style="text-align:left; font-size:0.82rem; color:#666; list-style:none; padding:0; margin:0 0 18px; flex:1; line-height:1.7;">
+                        <li>✔ Размещение в разделе</li>
+                        <li>✔ Публикация после модерации</li>
+                        <li style="color:#bbb;">✗ На главной странице</li>
+                        <li style="color:#bbb;">✗ VIP-значок</li>
+                    </ul>
+                    <button class="btn-submit" data-pkg="free" style="margin:0;">Выбрать</button>
+                </div>
+
+                <!-- НА ГЛАВНУЮ -->
+                <div style="border:2px solid #3498db; border-radius:16px; padding:24px 18px; text-align:center; background:#f0f8ff; display:flex; flex-direction:column; position:relative;">
+                    <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%); background:#3498db; color:white; font-size:0.75rem; font-weight:700; padding:3px 12px; border-radius:20px;">ПОПУЛЯРНО</div>
+                    <div style="font-size:2.2rem; margin-bottom:10px;">⭐</div>
+                    <div style="font-weight:700; font-size:1.05rem; color:#1a2b3c; margin-bottom:4px;">На главную</div>
+                    <div style="color:#2980b9; font-size:1.5rem; font-weight:800; margin-bottom:14px;">499 сом</div>
+                    <ul style="text-align:left; font-size:0.82rem; color:#666; list-style:none; padding:0; margin:0 0 18px; flex:1; line-height:1.7;">
+                        <li>✔ Всё из Стандарта</li>
+                        <li>✔ Вывод на главной странице</li>
+                        <li>✔ В 3× больше просмотров</li>
+                        <li style="color:#bbb;">✗ VIP-значок</li>
+                    </ul>
+                    <button class="btn-submit" data-pkg="featured" style="margin:0; background:linear-gradient(135deg,#3498db,#2980b9);">Выбрать</button>
+                </div>
+
+                <!-- VIP -->
+                <div style="border:2px solid #f39c12; border-radius:16px; padding:24px 18px; text-align:center; background:#fffbf0; display:flex; flex-direction:column;">
+                    <div style="font-size:2.2rem; margin-bottom:10px;">💎</div>
+                    <div style="font-weight:700; font-size:1.05rem; color:#1a2b3c; margin-bottom:4px;">VIP</div>
+                    <div style="color:#e67e22; font-size:1.5rem; font-weight:800; margin-bottom:14px;">999 сом</div>
+                    <ul style="text-align:left; font-size:0.82rem; color:#666; list-style:none; padding:0; margin:0 0 18px; flex:1; line-height:1.7;">
+                        <li>✔ Размещение в разделе</li>
+                        <li>✔ 💎 Золотая рамка VIP</li>
+                        <li>✔ Подъём в поиске ~7 дней</li>
+                        <li>✔ VIP-значок на карточке</li>
+                        <li style="color:#bbb;">✗ На главной странице</li>
+                    </ul>
+                    <button class="btn-submit" data-pkg="vip" style="margin:0; background:linear-gradient(135deg,#f39c12,#e67e22);">Выбрать</button>
+                </div>
+
+            </div>
+            <p style="font-size:0.78rem; color:#bbb; margin:18px 0 0; text-align:center;">Платные пакеты активируются после подтверждения оплаты администратором. Реквизиты для оплаты придут на ваш номер.</p>
+        </div>
     </div>
 
-    <!-- Модалка оплаты (рендерится из JS) -->
-    <div id="paymentModal" class="pay-modal" style="display:none;">
-        <div class="pay-backdrop"></div>
-        <div class="pay-sheet"></div>
+    <!-- Модальное окно демо-оплаты -->
+    <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:3100; align-items:center; justify-content:center; padding:20px;">
+        <div style="background:white; border-radius:22px; padding:36px 28px; max-width:400px; width:100%; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.3);">
+
+            <!-- Шаг 1: Форма карты -->
+            <div id="payStep1">
+                <button id="payModalClose" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.9rem;cursor:pointer;color:#ccc;line-height:1;">&times;</button>
+                <div style="text-align:center; margin-bottom:22px;">
+                    <div style="font-size:2.8rem; margin-bottom:8px;">💳</div>
+                    <h3 style="margin:0 0 4px; color:#1a2b3c; font-size:1.25rem;">Оплата пакета</h3>
+                    <div id="payAmount" style="color:#e67e22; font-size:1.5rem; font-weight:800; margin-top:4px;"></div>
+                    <div id="payPkgName" style="color:#999; font-size:0.82rem; margin-top:3px;"></div>
+                </div>
+                <div style="margin-bottom:14px;">
+                    <label style="display:block; font-size:0.83rem; color:#555; font-weight:600; margin-bottom:6px;">Номер карты</label>
+                    <input id="demoCardNum" type="text" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000"
+                           style="width:100%; padding:13px 14px; border:2px solid #e8e8e8; border-radius:10px; font-size:1rem; letter-spacing:2px; box-sizing:border-box; outline:none; transition:border 0.2s;">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:22px;">
+                    <div>
+                        <label style="display:block; font-size:0.83rem; color:#555; font-weight:600; margin-bottom:6px;">Срок действия</label>
+                        <input id="demoCardExp" type="text" inputmode="numeric" maxlength="5" placeholder="MM/YY"
+                               style="width:100%; padding:13px 14px; border:2px solid #e8e8e8; border-radius:10px; font-size:1rem; box-sizing:border-box; outline:none; transition:border 0.2s;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:0.83rem; color:#555; font-weight:600; margin-bottom:6px;">CVV</label>
+                        <input id="demoCardCvv" type="text" inputmode="numeric" maxlength="3" placeholder="000"
+                               style="width:100%; padding:13px 14px; border:2px solid #e8e8e8; border-radius:10px; font-size:1rem; box-sizing:border-box; outline:none; transition:border 0.2s;">
+                    </div>
+                </div>
+                <button id="paySubmitBtn" class="btn-submit" style="width:100%; margin:0; padding:14px;">Оплатить</button>
+                <p style="text-align:center; font-size:0.75rem; color:#bbb; margin:10px 0 0;">🔒 Демо-режим · Реальные деньги не списываются</p>
+            </div>
+
+            <!-- Шаг 2: Обработка -->
+            <div id="payStep2" style="display:none; text-align:center; padding:30px 0;">
+                <div style="width:52px; height:52px; border:4px solid #eee; border-top-color:#ff7f50; border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 20px;"></div>
+                <p style="color:#555; font-size:1rem; margin:0;">Обработка платежа...</p>
+            </div>
+
+            <!-- Шаг 3: Успех -->
+            <div id="payStep3" style="display:none; text-align:center; padding:20px 0;">
+                <div style="font-size:4rem; margin-bottom:12px;">✅</div>
+                <h3 style="color:#27ae60; margin:0 0 8px; font-size:1.3rem;">Оплата прошла!</h3>
+                <p style="color:#666; font-size:0.9rem; margin:0;">Публикуем объявление...</p>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

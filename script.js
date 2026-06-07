@@ -11,565 +11,6 @@ const STORAGE_KEYS = {
     REVIEWS: "osh_reviews"
 };
 
-// ============================================================
-// ГЕОГРАФИЯ: г. Ош + Ошская область (регионы и районы/сёла/мкр)
-// ============================================================
-const OSH_REGIONS = [
-    {
-        id: 'osh_city',
-        name: 'г. Ош',
-        districts: [
-            // Центральные районы
-            'Центр', 'Старый город', 'Сулейман-Тоо',
-            // Микрорайоны
-            'Мкр. Амир-Темур', 'Мкр. Анар', 'Мкр. Ак-Тилек', 'Мкр. Арашан',
-            'Мкр. Бешик-Жон', 'Мкр. Достук', 'Мкр. Кыргызстан', 'Мкр. Он-Адыр',
-            'Мкр. Папан', 'Мкр. Туран', 'Мкр. Черёмушки', 'Мкр. Юго-Восток',
-            'Мкр. Фуркат', 'Мкр. Маданият', 'Мкр. Маяк', 'Мкр. Ак-Буура',
-            'Мкр. Южный', 'Мкр. Северный', 'Мкр. Восточный', 'Мкр. Западный',
-            '35-й микрорайон',
-            // Жилмассивы / сёла в городской черте
-            'ХБК', 'Жапалак', 'Тулейкен', 'Кенеш', 'Турусбеково', 'Кызыл-Кыштак',
-            'Ак-Жар', 'Калинин айылы', 'Кызыл-Жар', 'Шейит-Дөбө',
-            'Жаңы-Турмуш', 'Өзгүр', 'Манас айылы', 'Ак-Күч', 'Бугу-Таш',
-            'Кулатов', 'Кара-Суу айылы', 'Аэропорт'
-        ]
-    },
-    {
-        id: 'alay',
-        name: 'Алайский район',
-        districts: [
-            'Гүлчө', 'Сары-Таш', 'Сары-Могол', 'Кашка-Суу', 'Кең-Жылга',
-            'Жошолу', 'Талдуу-Булак', 'Жекенди', 'Жылга', 'Кара-Мык',
-            'Будалык', 'Кызыл-Эшме', 'Конур-Дөбө', 'Таш-Булак', 'Кулчу',
-            'Ачык-Суу', 'Иркештам', 'Талдык', 'Ак-Босого', 'Кызыл-Шарк',
-            'Арчалуу', 'Төлөйкөн', 'Кара-Кабак', 'Кара-Тейит',
-            'Мырзаке', 'Айдар-Кен', 'Жаңы-Алай'
-        ]
-    },
-    {
-        id: 'aravan',
-        name: 'Араванский район',
-        districts: [
-            'Араван', 'Кара-Тоо', 'Чек-Абад', 'Мангыт', 'Ак-Таш',
-            'Нурабад', 'Таш-Булак', 'Керме-Тоо', 'Жаңы-Араван',
-            'Мырза-Аке', 'Мадыкөз', 'Карабагыш', 'Жаңы-Айыл', 'Күлбала',
-            'Бек-Абад', 'Шур-Абад', 'Жаңы-Жол', 'Бүргөндү', 'Төө-Моюн',
-            'Жаш-Тилек', 'Кыргыз-Кыштак', 'Ак-Жар', 'Достук',
-            'Шаркыратма', 'Жалпак-Таш', 'Күлбала-Сай'
-        ]
-    },
-    {
-        id: 'kara_kuldja',
-        name: 'Кара-Кульджинский район',
-        districts: [
-            'Кара-Кульджа', 'Көлдүк', 'Эркин-Тоо', 'Кашкар-Кыштак',
-            'Алай-Куу', 'Сары-Булак', 'Кара-Коо', 'Ылай-Талаа',
-            'Сопу-Коргон', 'Арпалык', 'Мырза-Ата', 'Карыпсалды',
-            'Кош-Булак', 'Капчыгай', 'Ылай-Саз', 'Жаңы-Жол',
-            'Кылжыр', 'Каранды', 'Кара-Бак', 'Эгиз-Тал',
-            'Каракулжа-Ата', 'Ак-Татыр', 'Жекенди', 'Ачы-Таш',
-            'Бел-Алды', 'Чалма', 'Кара-Шоро'
-        ]
-    },
-    {
-        id: 'kara_suu',
-        name: 'Кара-Суйский район',
-        districts: [
-            'Кара-Суу', 'Нариман', 'Мады', 'Жоош', 'Шарк', 'Папан',
-            'Отуз-Адыр', 'Савай', 'Төлөйкөн', 'Катта-Талдык',
-            'Кызыл-Кыштак', 'Кашкар-Кыштак', 'Мырза-Аке', 'Жийде',
-            'Кызыл-Суу', 'Достук', 'Ак-Таш', 'Кызыл-Шарк',
-            'Жаңы-Арык', 'Ак-Жар', 'Куршаб', 'Ак-Кыя', 'Жаңы-Жол',
-            'Бейшеке', 'Ленин айылы', 'Озгор', 'Чек', 'Мады-Ордо',
-            'Кулунду', 'Кара-Таш', 'Жапалак', 'Кызыл-Жар', 'Фуркат',
-            'Ылайлуу-Талаа', 'Жаңы-Турмуш', 'Ак-Буура', 'Найман',
-            'Кыргыз-Чек', 'Кара-Жыгач', 'Төө-Моюн', 'Төлөйкөн'
-        ]
-    },
-    {
-        id: 'nookat',
-        name: 'Ноокатский район',
-        districts: [
-            'Ноокат', 'Эски-Ноокат', 'Жаңы-Ноокат', 'Гүлбаар',
-            'Кыргыз-Ата', 'Жийде', 'Көк-Жар', 'Кулатов', 'Төөлөс',
-            'Он-Экин', 'Исанов', 'Кызыл-Октябрь', 'Бүргөндү',
-            'Зулпуев', 'Мырза-Аке', 'Ак-Жаңы', 'Кайрагач', 'Күлкөл',
-            'Сасык-Үңкүр', 'Көк-Бел', 'Ак-Кыя', 'Ничке-Сай',
-            'Мырза-Арык', 'Тон-Моюн', 'Чапаев', 'Жыйыр-Маа',
-            'Он-Төрт', 'Кыргыз-Ата-Арык', 'Кум-Бел', 'Ак-Таш',
-            'Ленин айылы', 'Көк-Арт', 'Кашка-Жол', 'Жаңы-Жол',
-            'Аркыт', 'Жооку', 'Сары-Булак'
-        ]
-    },
-    {
-        id: 'uzgen',
-        name: 'Узгенский район',
-        districts: [
-            'Узген', 'Мырза-Аке', 'Жазы', 'Кара-Таш', 'Заргер',
-            'Көлдүк', 'Кара-Даңкы', 'Куршаб', 'Салам-Алик', 'Жийде',
-            'Ден-Булак', 'Ден-Сай', 'Ылай-Талаа', 'Алтын-Булак',
-            'Ак-Терек', 'Кыргыз-Кыштак', 'Улуу-Тоо', 'Көк-Жар',
-            'Чанач', 'Боз-Жар', 'Мырза-Ата', 'Кызыл-Октябрь',
-            'Жигуль', 'Көк-Арт', 'Көк-Таш', 'Нариман', 'Ийри-Суу',
-            'Кара-Гуз', 'Жалгыз-Өрүк', 'Кашкалдак', 'Жаңы-Заман',
-            'Ак-Жар', 'Жаңы-Турмуш', 'Бөрү-Тал', 'Кызыл-Тоо',
-            'Чолпон', 'Жаңы-Арык'
-        ]
-    },
-    {
-        id: 'chon_alay',
-        name: 'Чон-Алайский район',
-        districts: [
-            'Дароот-Коргон', 'Жекенди', 'Кабык', 'Кызыл-Эшме',
-            'Сары-Могол', 'Жаш-Тилек', 'Кашка-Суу', 'Чак',
-            'Жылуу-Суу', 'Карамык', 'Кара-Теит', 'Ачык-Алма',
-            'Ылай-Суу', 'Кашкар-Көл', 'Кызыл-Алай'
-        ]
-    }
-];
-
-// Глобальный стейт выбранного региона/района
-window.__regionDistrictFilter = { region: '', district: '' };
-
-// Нормализация для сравнения адресов
-function _normLoc(s) {
-    return String(s || '').toLowerCase().replace(/ё/g, 'е').replace(/[^\wа-яңөү\s-]/gi, ' ').replace(/\s+/g, ' ').trim();
-}
-
-// ============================================================
-// UPGRADE фильтров listing-страниц: segmented rooms, валюта,
-// документы, context-aware поля участков/коммерции
-// ============================================================
-const DOCUMENT_TYPES = [
-    { value: '', label: 'Любые' },
-    { value: 'red_book', label: 'Красная книга' },
-    { value: 'tech_passport', label: 'Техпаспорт' },
-    { value: 'dkp', label: 'ДКП' }
-];
-
-const LAND_PURPOSES = [
-    { value: '', label: 'Любое' },
-    { value: 'residential', label: 'ИЖС (жилое)' },
-    { value: 'agricultural', label: 'С/х назначение' },
-    { value: 'garden', label: 'Садовый участок' },
-    { value: 'commercial', label: 'Коммерческое' },
-    { value: 'industrial', label: 'Промышленное' }
-];
-
-const UTILITIES_OPTIONS = [
-    { value: '', label: 'Любые' },
-    { value: 'water', label: 'Вода' },
-    { value: 'electricity', label: 'Электричество' },
-    { value: 'gas', label: 'Газ' },
-    { value: 'sewage', label: 'Канализация' },
-    { value: 'all', label: 'Все коммуникации' }
-];
-
-const COMMERCE_TYPES = [
-    { value: '', label: 'Любой' },
-    { value: 'office', label: 'Офис' },
-    { value: 'shop', label: 'Магазин' },
-    { value: 'warehouse', label: 'Склад' },
-    { value: 'restaurant', label: 'Кафе/ресторан' },
-    { value: 'salon', label: 'Салон/услуги' },
-    { value: 'production', label: 'Производство' }
-];
-
-// Глобальное состояние валюты фильтра цены (UI-only)
-window.__priceCurrency = localStorage.getItem('osh_price_currency') || 'KGS';
-
-function upgradeListingFilters() {
-    const page = document.body?.getAttribute('data-page');
-    if (!['sale', 'rent', 'land', 'commerce'].includes(page)) return;
-    const grid = document.querySelector('.fbar-grid');
-    if (!grid || grid.dataset.upgraded === '1') return;
-    grid.dataset.upgraded = '1';
-
-    // --- 1. Segmented control для комнат (sale/rent) ---
-    const roomsSelect = document.getElementById('roomsFilter');
-    if (roomsSelect) {
-        const wrap = roomsSelect.closest('.fbar-field');
-        if (wrap) {
-            wrap.id = 'roomsSegField';
-            const currentVal = roomsSelect.value || '';
-            roomsSelect.style.display = 'none';
-            // Удалим возможную существующую segmented-группу
-            wrap.querySelector('.fbar-segmented')?.remove();
-            const seg = document.createElement('div');
-            seg.className = 'fbar-segmented';
-            seg.setAttribute('role', 'group');
-            const opts = [
-                { v: '', t: 'Любое' },
-                { v: '1', t: '1' },
-                { v: '2', t: '2' },
-                { v: '3', t: '3' },
-                { v: '4+', t: '4+' }
-            ];
-            seg.innerHTML = opts.map(o =>
-                `<button type="button" class="fbar-seg-btn ${o.v === currentVal ? 'active' : ''}" data-val="${o.v}">${o.t}</button>`
-            ).join('');
-            seg.addEventListener('click', (e) => {
-                const btn = e.target.closest('.fbar-seg-btn');
-                if (!btn) return;
-                seg.querySelectorAll('.fbar-seg-btn').forEach(b => b.classList.toggle('active', b === btn));
-                roomsSelect.value = btn.dataset.val;
-                roomsSelect.dispatchEvent(new Event('input', { bubbles: true }));
-                roomsSelect.dispatchEvent(new Event('change', { bubbles: true }));
-            });
-            wrap.appendChild(seg);
-        }
-    }
-
-    // --- 2. Переключатель валюты KGS/USD рядом с ценой ---
-    const priceField = grid.querySelector('.fbar-field--wide') ||
-                       Array.from(grid.querySelectorAll('.fbar-field')).find(f => f.querySelector('#priceMin, #minPriceFilter'));
-    if (priceField && !priceField.querySelector('.fbar-currency-toggle')) {
-        const label = priceField.querySelector('.fbar-label');
-        if (label) {
-            const cur = window.__priceCurrency;
-            const toggle = document.createElement('div');
-            toggle.className = 'fbar-currency-toggle';
-            toggle.innerHTML = `
-                <button type="button" class="fbar-cur-btn ${cur === 'KGS' ? 'active' : ''}" data-cur="KGS">сом</button>
-                <button type="button" class="fbar-cur-btn ${cur === 'USD' ? 'active' : ''}" data-cur="USD">$</button>
-            `;
-            toggle.addEventListener('click', (e) => {
-                const b = e.target.closest('.fbar-cur-btn');
-                if (!b) return;
-                const newCur = b.dataset.cur;
-                window.__priceCurrency = newCur;
-                localStorage.setItem('osh_price_currency', newCur);
-                toggle.querySelectorAll('.fbar-cur-btn').forEach(x => x.classList.toggle('active', x === b));
-                updateCurrencyUI();
-            });
-            // Обернуть label + toggle в flex
-            const wrap = document.createElement('div');
-            wrap.className = 'fbar-label-row';
-            label.after(wrap);
-            wrap.appendChild(label);
-            wrap.appendChild(toggle);
-        }
-    }
-
-    // --- 3. Фильтр "Документы" ---
-    if (!document.getElementById('documentsFilter')) {
-        const field = document.createElement('div');
-        field.className = 'fbar-field';
-        field.id = 'documentsField';
-        field.innerHTML = `
-            <label class="fbar-label">Документы</label>
-            <select id="documentsFilter" class="fbar-select">
-                ${DOCUMENT_TYPES.map(d => `<option value="${d.value}">${d.label}</option>`).join('')}
-            </select>
-        `;
-        grid.appendChild(field);
-    }
-
-    // --- 4. Land-specific поля (назначение + коммуникации) ---
-    if (!document.getElementById('landPurposeFilter')) {
-        const lpField = document.createElement('div');
-        lpField.className = 'fbar-field fbar-land-only';
-        lpField.id = 'landPurposeField';
-        lpField.innerHTML = `
-            <label class="fbar-label">Назначение земли</label>
-            <select id="landPurposeFilter" class="fbar-select">
-                ${LAND_PURPOSES.map(p => `<option value="${p.value}">${p.label}</option>`).join('')}
-            </select>
-        `;
-        grid.appendChild(lpField);
-
-        const utField = document.createElement('div');
-        utField.className = 'fbar-field fbar-land-only';
-        utField.id = 'utilitiesField';
-        utField.innerHTML = `
-            <label class="fbar-label">Коммуникации</label>
-            <select id="utilitiesFilter" class="fbar-select">
-                ${UTILITIES_OPTIONS.map(u => `<option value="${u.value}">${u.label}</option>`).join('')}
-            </select>
-        `;
-        grid.appendChild(utField);
-    }
-
-    // --- 5. Commerce-specific: тип коммерции ---
-    if (!document.getElementById('commerceTypeFilter')) {
-        const ctField = document.createElement('div');
-        ctField.className = 'fbar-field fbar-commerce-only';
-        ctField.id = 'commerceTypeField';
-        ctField.innerHTML = `
-            <label class="fbar-label">Тип коммерции</label>
-            <select id="commerceTypeFilter" class="fbar-select">
-                ${COMMERCE_TYPES.map(c => `<option value="${c.value}">${c.label}</option>`).join('')}
-            </select>
-        `;
-        grid.appendChild(ctField);
-    }
-
-    // --- 6. Контекстная видимость + реакция на смену категории ---
-    applyContextVisibility();
-    const catSel = document.getElementById('categorySelect') || document.getElementById('categoryFilter');
-    catSel?.addEventListener('change', applyContextVisibility);
-
-    // --- 7. Подписка новых полей на применение фильтра ---
-    ['documentsFilter', 'landPurposeFilter', 'utilitiesFilter', 'commerceTypeFilter']
-        .forEach(id => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            el.addEventListener('change', () => {
-                if (typeof window.__applyListingFilter === 'function') window.__applyListingFilter();
-                else if (typeof applyFilters === 'function') applyFilters();
-            });
-        });
-
-    updateCurrencyUI();
-}
-
-// Обновить placeholder/символы в зависимости от валюты
-function updateCurrencyUI() {
-    const cur = window.__priceCurrency || 'KGS';
-    const sym = cur === 'USD' ? '$' : 'сом';
-    // Обновить label цены
-    document.querySelectorAll('.fbar-field--wide .fbar-label, .fbar-field .fbar-label').forEach(l => {
-        const t = l.textContent || '';
-        if (/^цена/i.test(t.trim())) {
-            l.textContent = t.replace(/\((сом|\$|USD|KGS)\)/i, '').trim()
-                            .replace(/цена.*$/i, `Цена (${sym})`)
-                            || `Цена (${sym})`;
-        }
-    });
-    // Обновить плейсхолдеры
-    document.querySelectorAll('#priceMin, #minPriceFilter').forEach(el => { el.dataset.currency = cur; el.placeholder = `от, ${sym}`; });
-    document.querySelectorAll('#priceMax, #maxPriceFilter').forEach(el => { el.dataset.currency = cur; el.placeholder = `до, ${sym}`; });
-}
-
-// Context-aware видимость полей по категории / типу страницы
-function applyContextVisibility() {
-    const page = document.body?.getAttribute('data-page');
-    const catSel = document.getElementById('categorySelect') || document.getElementById('categoryFilter');
-    const cat = (catSel?.value || '').toLowerCase();
-
-    const isLandPage = page === 'land';
-    const isCommercePage = page === 'commerce';
-    const isLandCat = cat === 'land' || isLandPage;
-    const isCommerceCat = cat === 'commerce' || isCommercePage;
-    const isResidential = !isLandCat && !isCommercePage && (cat === 'flat' || cat === 'house' || cat === '' || cat === 'all' || page === 'sale' || page === 'rent');
-
-    const toggle = (el, show) => { if (el) el.style.display = show ? '' : 'none'; };
-
-    toggle(document.getElementById('roomsSegField'), isResidential && !isLandCat);
-    const furnField = document.getElementById('furnitureFilter')?.closest('.fbar-field');
-    toggle(furnField, isResidential && !isLandCat);
-
-    document.querySelectorAll('.fbar-land-only').forEach(el => {
-        el.style.display = isLandCat ? '' : 'none';
-    });
-    document.querySelectorAll('.fbar-commerce-only').forEach(el => {
-        el.style.display = isCommerceCat ? '' : 'none';
-    });
-}
-
-// Инициализация модалки "Регион/район" (лалафо-стиль)
-function initRegionFilterUI() {
-    const select = document.getElementById('districtFilter');
-    if (!select || select.dataset.rdUpgraded === '1') return;
-    select.dataset.rdUpgraded = '1';
-    select.style.display = 'none';
-
-    // Кнопка-триггер
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.id = 'regionFilterBtn';
-    btn.className = 'fbar-select region-filter-btn';
-    btn.style.cssText = 'cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;justify-content:space-between;';
-    btn.innerHTML = '<span class="rf-btn-label"><i class="fas fa-map-marker-alt" style="color:#ff6b35;margin-right:6px;"></i>Все регионы</span><i class="fas fa-chevron-down" style="opacity:.6;"></i>';
-    btn.addEventListener('click', openRegionModal);
-    select.parentElement.appendChild(btn);
-
-    // Модалка (один раз на страницу)
-    if (!document.getElementById('regionModal')) buildRegionModal();
-
-    // Восстановление из URL / сохранённого фильтра
-    const sp = new URLSearchParams(window.location.search);
-    const savedRegion = sp.get('region') || '';
-    const savedDistrict = sp.get('district') || '';
-    if (savedRegion || savedDistrict) {
-        setRegionDistrict(savedRegion, savedDistrict, false);
-    }
-}
-
-function buildRegionModal() {
-    const modal = document.createElement('div');
-    modal.id = 'regionModal';
-    modal.className = 'rd-modal';
-    modal.innerHTML = `
-        <div class="rd-modal-backdrop"></div>
-        <div class="rd-modal-box rd-compact">
-            <div class="rd-modal-head">
-                <h3><i class="fas fa-map-marker-alt"></i> Выберите место</h3>
-                <button class="rd-close" type="button" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="rd-modal-body">
-                <div class="rd-col rd-regions">
-                    <div class="rd-col-title">Регион</div>
-                    <div class="rd-search"><input type="text" id="rdRegionSearch" placeholder="Поиск региона..."></div>
-                    <div class="rd-list" id="rdRegionsList"></div>
-                </div>
-                <div class="rd-col rd-districts">
-                    <div class="rd-col-title">Район / село</div>
-                    <div class="rd-search"><input type="text" id="rdDistrictSearch" placeholder="Поиск места..."></div>
-                    <div class="rd-list" id="rdDistrictsList">
-                        <div class="rd-empty">Сначала выберите регион</div>
-                    </div>
-                </div>
-            </div>
-            <div class="rd-modal-foot">
-                <button type="button" class="rd-btn-reset">Сбросить</button>
-                <button type="button" class="rd-btn-apply">Применить</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    const regionsList = modal.querySelector('#rdRegionsList');
-    const regionSearchInput = modal.querySelector('#rdRegionSearch');
-    const districtSearchInput = modal.querySelector('#rdDistrictSearch');
-
-    let tempRegion = window.__regionDistrictFilter.region || '';
-    let tempDistrict = window.__regionDistrictFilter.district || '';
-
-    const renderRegions = () => {
-        const q = _normLoc(regionSearchInput?.value || '');
-        const filtered = OSH_REGIONS.filter(r => !q || _normLoc(r.name).includes(q));
-        regionsList.innerHTML = (!q ? `<div class="rd-item rd-item-all ${!tempRegion ? 'active' : ''}" data-region="">Все регионы</div>` : '') +
-            filtered.map(r => `<div class="rd-item ${tempRegion === r.name ? 'active' : ''}" data-region="${r.name}">${r.name}</div>`).join('');
-        if (!filtered.length && q) regionsList.innerHTML = '<div class="rd-empty">Ничего не найдено</div>';
-    };
-
-    const renderDistricts = () => {
-        const listEl = modal.querySelector('#rdDistrictsList');
-        if (!tempRegion) {
-            listEl.innerHTML = `<div class="rd-empty">Сначала выберите регион слева</div>`;
-            return;
-        }
-        const region = OSH_REGIONS.find(r => r.name === tempRegion);
-        if (!region) { listEl.innerHTML = ''; return; }
-        const q = _normLoc(districtSearchInput?.value || '');
-        const filtered = region.districts.filter(d => !q || _normLoc(d).includes(q));
-        listEl.innerHTML = (!q ? `<div class="rd-item rd-item-all ${!tempDistrict ? 'active' : ''}" data-district="">Весь ${region.name}</div>` : '') +
-            filtered.map(d => `<div class="rd-item ${tempDistrict === d ? 'active' : ''}" data-district="${d}">${d}</div>`).join('');
-        if (!filtered.length && q) listEl.innerHTML = '<div class="rd-empty">Ничего не найдено</div>';
-    };
-
-    renderRegions();
-    regionSearchInput?.addEventListener('input', renderRegions);
-    districtSearchInput?.addEventListener('input', renderDistricts);
-
-    regionsList.addEventListener('click', (e) => {
-        const item = e.target.closest('.rd-item');
-        if (!item) return;
-        tempRegion = item.dataset.region || '';
-        tempDistrict = '';
-        regionsList.querySelectorAll('.rd-item').forEach(el => el.classList.toggle('active', el === item));
-        renderDistricts();
-    });
-
-    modal.querySelector('#rdDistrictsList').addEventListener('click', (e) => {
-        const item = e.target.closest('.rd-item');
-        if (!item) return;
-        tempDistrict = item.dataset.district || '';
-        item.parentElement.querySelectorAll('.rd-item').forEach(el => el.classList.toggle('active', el === item));
-    });
-
-    modal.querySelector('.rd-close').addEventListener('click', closeRegionModal);
-    modal.querySelector('.rd-modal-backdrop').addEventListener('click', closeRegionModal);
-    modal._applyHandler = (r, d) => setRegionDistrict(r, d, true);
-    modal.querySelector('.rd-btn-reset').addEventListener('click', () => {
-        tempRegion = ''; tempDistrict = '';
-        modal._applyHandler('', '');
-        closeRegionModal();
-    });
-    modal.querySelector('.rd-btn-apply').addEventListener('click', () => {
-        modal._applyHandler(tempRegion, tempDistrict);
-        closeRegionModal();
-    });
-    // Экспонируем установку временного состояния извне
-    modal._setTemp = (r, d) => { tempRegion = r || ''; tempDistrict = d || ''; };
-
-    // Экспонируем для пересинхронизации при открытии
-    modal._syncFromState = (override) => {
-        const src = override || window.__regionDistrictFilter;
-        tempRegion = src.region || '';
-        tempDistrict = src.district || '';
-        if (regionSearchInput) regionSearchInput.value = '';
-        if (districtSearchInput) districtSearchInput.value = '';
-        renderRegions();
-        renderDistricts();
-    };
-}
-
-function openRegionModal(opts) {
-    const modal = document.getElementById('regionModal') || (buildRegionModal(), document.getElementById('regionModal'));
-    if (!modal) return;
-    // Восстановить дефолтный обработчик или заменить
-    if (opts && typeof opts.onApply === 'function') {
-        modal._applyHandler = opts.onApply;
-    } else {
-        modal._applyHandler = (r, d) => setRegionDistrict(r, d, true);
-    }
-    const initial = opts?.initial || null;
-    if (typeof modal._syncFromState === 'function') modal._syncFromState(initial);
-    modal.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeRegionModal() {
-    const modal = document.getElementById('regionModal');
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    document.body.style.overflow = '';
-}
-
-function setRegionDistrict(region, district, triggerApply) {
-    window.__regionDistrictFilter = { region: region || '', district: district || '' };
-    // Обновить кнопку
-    const btn = document.getElementById('regionFilterBtn');
-    if (btn) {
-        const labelEl = btn.querySelector('.rf-btn-label');
-        let text = 'Все регионы';
-        if (region && district) text = `${district}, ${region}`;
-        else if (region) text = region;
-        if (labelEl) labelEl.innerHTML = `<i class="fas fa-map-marker-alt" style="color:#ff6b35;margin-right:6px;"></i>${text}`;
-    }
-    // Сохранить в URL
-    try {
-        const url = new URL(window.location.href);
-        if (region) url.searchParams.set('region', region); else url.searchParams.delete('region');
-        if (district) url.searchParams.set('district', district); else url.searchParams.delete('district');
-        history.replaceState({}, '', url.toString());
-    } catch (e) {}
-    // Триггер применения
-    if (triggerApply) {
-        if (typeof window.__applyListingFilter === 'function') window.__applyListingFilter();
-        else if (typeof applyFilters === 'function') applyFilters();
-    }
-}
-
-// Совпадает ли адрес объявления с выбранным регионом/районом
-function adMatchesRegionDistrict(ad) {
-    const sel = window.__regionDistrictFilter || {};
-    if (!sel.region && !sel.district) return true;
-    const addr = _normLoc(ad.address);
-    if (sel.district) {
-        return addr.includes(_normLoc(sel.district));
-    }
-    const region = OSH_REGIONS.find(r => r.name === sel.region);
-    if (!region) return addr.includes(_normLoc(sel.region));
-    if (addr.includes(_normLoc(sel.region))) return true;
-    // Для г. Ош сопоставляем также по "ош"
-    if (region.id === 'osh_city' && /\bош\b/.test(addr)) return true;
-    return region.districts.some(d => addr.includes(_normLoc(d)));
-}
-
 const firebaseConfig = {
     apiKey: "AIzaSyAjrfHv7FAIMrRFUYOYYzGghgSyc5TARr8",
     authDomain: "oshestate-23796.firebaseapp.com",
@@ -1232,23 +673,10 @@ function animateCounters() {
 function renderHome() {
     const container = document.getElementById("featured-listings");
     if (!container) return;
-    const all = storage.getAds().filter((ad) => ad.status === "active");
-    // Сначала — оплаченные на главной, отсортированные по приоритету
-    let ads = all.filter((ad) => ad.featuredOnHome === true || ad.vip === true)
-                 .sort((a, b) => getPriorityScore(b) - getPriorityScore(a))
-                 .slice(0, 6);
-    // Fallback: если оплаченных мало, добираем свежими
-    if (ads.length < 6) {
-        const ids = new Set(ads.map(a => a.id));
-        const fresh = all
-            .filter(ad => !ids.has(ad.id))
-            .sort((a, b) => new Date(b.date || b.createdAt || 0) - new Date(a.date || a.createdAt || 0))
-            .slice(0, 6 - ads.length);
-        ads = ads.concat(fresh);
-    }
-    container.innerHTML = ads.length
-        ? ads.map(createListingCard).join("")
-        : "<p>Пока нет активных объявлений.</p>";
+    const ads = storage.getAds()
+        .filter((ad) => ad.status === "active" && ad.featuredOnHome === true)
+        .slice(0, 6);
+    container.innerHTML = ads.length ? ads.map(createListingCard).join("") : "<p>Сейчас нет оплаченных размещений в топе.</p>";
     bindFavoriteButtons(container);
 
     if (document.querySelector('.stat-number')) {
@@ -1451,7 +879,7 @@ function renderFilteredList(categories, mode) {
         const minArea = Number(document.getElementById("areaMin")?.value || 0);
         const maxArea = Number(document.getElementById("areaMax")?.value || 0);
         const minRooms = Number(document.getElementById("roomsFilter")?.value || 0);
-        const district = ''; // legacy — теперь используется adMatchesRegionDistrict
+        const district = (document.getElementById("districtFilter")?.value || "").trim().toLowerCase();
         const chosenCat = (document.getElementById("categorySelect") || document.getElementById("categoryFilter"))?.value || "all";
         const nearMeCoords = document.body.dataset.nearMe ? JSON.parse(document.body.dataset.nearMe) : null;
 
@@ -1461,32 +889,8 @@ function renderFilteredList(categories, mode) {
         if (minArea > 0) ads = ads.filter((a) => Number(a.area || 0) >= minArea);
         if (maxArea > 0) ads = ads.filter((a) => Number(a.area || 0) <= maxArea);
         if (minRooms > 0) ads = ads.filter((a) => Number(a.rooms || 0) >= minRooms);
-        ads = ads.filter(adMatchesRegionDistrict);
+        if (district) ads = ads.filter((a) => String(a.address || "").toLowerCase().includes(district));
         if (chosenCat !== "all") ads = ads.filter((a) => a.category === chosenCat);
-
-        // Новые умные фильтры
-        const docsSel = document.getElementById('documentsFilter')?.value || '';
-        const landSel = document.getElementById('landPurposeFilter')?.value || '';
-        const utilSel = document.getElementById('utilitiesFilter')?.value || '';
-        const commSel = document.getElementById('commerceTypeFilter')?.value || '';
-        if (docsSel) {
-            ads = ads.filter(a => {
-                const d = a.documents;
-                if (!d) return false;
-                if (Array.isArray(d)) return d.includes(docsSel);
-                return String(d) === docsSel;
-            });
-        }
-        if (landSel) ads = ads.filter(a => a.landPurpose === landSel);
-        if (utilSel) {
-            ads = ads.filter(a => {
-                const u = a.utilities;
-                if (!u) return false;
-                if (Array.isArray(u)) return utilSel === 'all' ? ['water','electricity','gas','sewage'].every(k => u.includes(k)) : u.includes(utilSel);
-                return utilSel === 'all' ? String(u) === 'all' : String(u).includes(utilSel);
-            });
-        }
-        if (commSel) ads = ads.filter(a => a.commerceType === commSel);
         if (nearMeCoords) {
             const toRad = (deg) => deg * (Math.PI / 180);
             const distKm = (a, b, c, d) => {
@@ -1522,14 +926,11 @@ function renderFilteredList(categories, mode) {
 
     window.__applyListingFilter = apply;
 
-    const fields = ["searchInput", "priceMax", "priceMin", "areaMin", "areaMax", "roomsFilter", "districtFilter", "sortSelect", "categorySelect", "sortFilter", "categoryFilter", "minPriceFilter", "maxPriceFilter", "furnitureFilter", "documentsFilter", "landPurposeFilter", "utilitiesFilter", "commerceTypeFilter"];
+    const fields = ["searchInput", "priceMax", "priceMin", "areaMin", "areaMax", "roomsFilter", "districtFilter", "sortSelect", "categorySelect", "sortFilter", "categoryFilter", "minPriceFilter", "maxPriceFilter", "furnitureFilter"];
     fields.forEach((id) => document.getElementById(id)?.addEventListener("input", apply));
-    ["sortSelect", "categorySelect", "sortFilter", "categoryFilter", "furnitureFilter", "documentsFilter", "landPurposeFilter", "utilitiesFilter", "commerceTypeFilter"].forEach(id => document.getElementById(id)?.addEventListener("change", apply));
+    ["sortSelect", "categorySelect", "sortFilter", "categoryFilter", "furnitureFilter"].forEach(id => document.getElementById(id)?.addEventListener("change", apply));
     document.getElementById("resetFiltersBtn")?.addEventListener("click", () => {
         fields.forEach((id) => { const el = document.getElementById(id); if (el) el.value = id === "categorySelect" ? "all" : ""; });
-        // Сброс региона/района и segmented control комнат
-        if (typeof setRegionDistrict === 'function') setRegionDistrict('', '', false);
-        document.querySelectorAll('.fbar-seg-btn').forEach(b => b.classList.toggle('active', b.dataset.val === ''));
         delete document.body.dataset.nearMe;
         apply();
     });
@@ -1580,8 +981,6 @@ function renderDetails() {
     const furnitureLabel = { yes: "С мебелью", no: "Без мебели", partial: "Частично" };
     const landLabel = { izhs: "ИЖС (под жилой дом)", dacha: "Дача / садоводство", selhoz: "Сельхозназначение", commerce: "Коммерческое" };
     const commerceLabel = { office: "Офис", shop: "Магазин / торговая точка", warehouse: "Склад", production: "Производство", restaurant: "Ресторан / кафе" };
-    const houseTypeLabel = { brick: "Кирпичный", block: "Блочный", wood: "Деревянный", monolithic: "Монолитный", panel: "Панельный", other: "Другой" };
-    const houseExtrasLabel = { garage: "Гараж", bathhouse: "Баня", fence: "Забор" };
     specs.innerHTML = `
         <li><strong>Категория</strong>${getCatName(ad.category)}</li>
         <li><strong>Тип сделки</strong>${ad.type === "rent" ? "Аренда" : "Продажа"}</li>
@@ -1589,9 +988,6 @@ function renderDetails() {
         ${ad.rooms ? `<li><strong>Комнат</strong>${ad.rooms}</li>` : ""}
         ${ad.floor ? `<li><strong>Этаж</strong>${ad.floor}${ad.totalFloors ? " из " + ad.totalFloors : ""}</li>` : ""}
         ${ad.furniture ? `<li><strong>Мебель</strong>${furnitureLabel[ad.furniture] || ad.furniture}</li>` : ""}
-        ${ad.landArea ? `<li><strong>Площадь участка</strong>${ad.landArea} соток</li>` : ""}
-        ${ad.houseType ? `<li><strong>Тип дома</strong>${houseTypeLabel[ad.houseType] || ad.houseType}</li>` : ""}
-        ${ad.houseExtras && ad.houseExtras.length ? `<li><strong>Дополнительно</strong>${ad.houseExtras.map(e => houseExtrasLabel[e] || e).join(", ")}</li>` : ""}
         ${ad.landPurpose ? `<li><strong>Назначение</strong>${landLabel[ad.landPurpose] || ad.landPurpose}</li>` : ""}
         ${ad.commerceType ? `<li><strong>Тип помещения</strong>${commerceLabel[ad.commerceType] || ad.commerceType}</li>` : ""}
     `;
@@ -1931,21 +1327,18 @@ function initAddPageForm() {
 
     const typeSelect = document.getElementById("inputType");
     const roomsGroup = document.getElementById("roomsGroup");
-    const flatFields = document.getElementById("flatFields");
-    const houseFields = document.getElementById("houseFields");
+    const flatHouseFields = document.getElementById("flatHouseFields");
     const landFields = document.getElementById("landFields");
     const commerceFields = document.getElementById("commerceFields");
     const areaLabel = document.querySelector("#inputArea")?.closest(".form-group")?.querySelector("label");
 
     const updateCategoryFields = () => {
         const cat = typeSelect?.value;
-        const isFlat = cat === "flat";
-        const isHouse = cat === "house";
+        const isFlat = cat === "flat" || cat === "house";
         const isLand = cat === "land";
         const isCommerce = cat === "commerce";
-        if (roomsGroup) roomsGroup.style.display = (isFlat || isHouse) ? "" : "none";
-        if (flatFields) flatFields.style.display = isFlat ? "" : "none";
-        if (houseFields) houseFields.style.display = isHouse ? "" : "none";
+        if (roomsGroup) roomsGroup.style.display = isFlat ? "" : "none";
+        if (flatHouseFields) flatHouseFields.style.display = isFlat ? "" : "none";
         if (landFields) landFields.style.display = isLand ? "" : "none";
         if (commerceFields) commerceFields.style.display = isCommerce ? "" : "none";
         if (areaLabel) areaLabel.textContent = isLand ? "Площадь (сотых)" : "Площадь (м²)";
@@ -1953,88 +1346,6 @@ function initAddPageForm() {
 
     typeSelect?.addEventListener("change", updateCategoryFields);
     updateCategoryFields();
-
-    // --- Авто-формат и валидация телефона ---
-    const phoneInputEl = document.getElementById('inputPhone');
-    if (phoneInputEl) {
-        const formatKgPhone = (raw) => {
-            let d = (raw || '').replace(/\D/g, '');
-            // Если начинается с 996 — оставляем; если с 0 — заменяем на 996; иначе допишем 996
-            if (d.startsWith('996')) d = d.slice(0, 12);
-            else if (d.startsWith('0')) d = '996' + d.slice(1, 10);
-            else if (d.length > 0) d = '996' + d.slice(0, 9);
-            if (!d) return '';
-            // +996 XXX XXX XXX
-            const p = d.slice(3);
-            let out = '+996';
-            if (p.length) out += ' ' + p.slice(0, 3);
-            if (p.length > 3) out += ' ' + p.slice(3, 6);
-            if (p.length > 6) out += ' ' + p.slice(6, 9);
-            return out;
-        };
-        phoneInputEl.addEventListener('input', () => {
-            const cursorAtEnd = phoneInputEl.selectionStart === phoneInputEl.value.length;
-            phoneInputEl.value = formatKgPhone(phoneInputEl.value);
-            if (cursorAtEnd) phoneInputEl.setSelectionRange(phoneInputEl.value.length, phoneInputEl.value.length);
-            phoneInputEl.classList.remove('pay-err');
-        });
-        phoneInputEl.addEventListener('blur', () => {
-            const digits = phoneInputEl.value.replace(/\D/g, '');
-            if (phoneInputEl.value && digits.length !== 12) {
-                phoneInputEl.classList.add('pay-err');
-            }
-        });
-        // Нормализуем предзаполненный номер из профиля
-        if (phoneInputEl.value) phoneInputEl.value = formatKgPhone(phoneInputEl.value);
-    }
-
-    // --- Segmented control: количество комнат ---
-    const roomsSeg = document.getElementById('roomsSegControl');
-    const roomsHidden = document.getElementById('inputRooms');
-    roomsSeg?.addEventListener('click', (e) => {
-        const btn = e.target.closest('.fbar-seg-btn');
-        if (!btn) return;
-        roomsSeg.querySelectorAll('.fbar-seg-btn').forEach(b => b.classList.toggle('active', b === btn));
-        if (roomsHidden) roomsHidden.value = btn.dataset.val;
-    });
-
-    // --- Переключатель валюты рядом с ценой ---
-    const curToggle = document.getElementById('inputCurrencyToggle');
-    const curHidden = document.getElementById('inputCurrency');
-    const curLabel = document.getElementById('inputPriceCurLabel');
-    const priceInputEl = document.getElementById('inputPrice');
-    curToggle?.addEventListener('click', (e) => {
-        const b = e.target.closest('.fbar-cur-btn');
-        if (!b) return;
-        const cur = b.dataset.cur;
-        curToggle.querySelectorAll('.fbar-cur-btn').forEach(x => x.classList.toggle('active', x === b));
-        if (curHidden) curHidden.value = cur;
-        if (curLabel) curLabel.textContent = cur === 'USD' ? '($)' : '(сом)';
-        if (priceInputEl) priceInputEl.placeholder = cur === 'USD' ? '0 $' : '0 сом';
-    });
-
-    // --- Кнопка "Регион и населённый пункт" ---
-    const regionBtn = document.getElementById('addRegionBtn');
-    const regionHidden = document.getElementById('inputRegion');
-    const districtHidden = document.getElementById('inputDistrict');
-    regionBtn?.addEventListener('click', () => {
-        openRegionModal({
-            initial: { region: regionHidden?.value || '', district: districtHidden?.value || '' },
-            onApply: (region, district) => {
-                if (regionHidden) regionHidden.value = region || '';
-                if (districtHidden) districtHidden.value = district || '';
-                const labelEl = regionBtn.querySelector('.rf-btn-label');
-                let text = 'Выбрать регион и район';
-                if (region && district) text = `${district}, ${region}`;
-                else if (region) text = region;
-                if (labelEl) labelEl.innerHTML = `<i class="fas fa-map-marker-alt" style="color:#ff6b35;margin-right:6px;"></i>${text}`;
-                // Если адрес пустой — предзаполнить комбинацией
-                if (addressInput && !addressInput.value.trim() && (region || district)) {
-                    addressInput.value = [district, region].filter(Boolean).join(', ');
-                }
-            }
-        });
-    });
 
     if (document.getElementById("map-picker") && typeof window.L !== "undefined") {
         const map = L.map("map-picker").setView([40.5283, 72.7985], 12);
@@ -2128,11 +1439,6 @@ function initAddPageForm() {
             setButtonLoading(submitBtn, false);
             return showToast("Проверьте поля формы", "error");
         }
-        if (!uploaded.length) {
-            setFieldError(fileInput, "Добавьте хотя бы одно фото объекта");
-            setButtonLoading(submitBtn, false);
-            return showToast("Загрузите хотя бы одно фото", "error");
-        }
 
         const cat = document.getElementById("inputType").value;
         const maxAreaMap = { flat: 1000, house: 5000, land: 100000, commerce: 10000 };
@@ -2159,15 +1465,6 @@ function initAddPageForm() {
             return showToast("Проверьте количество комнат", "error");
         }
 
-        // Проверка телефона
-        const phoneEl = document.getElementById("inputPhone");
-        const phoneDigits = (phoneEl?.value || "").replace(/\D/g, "");
-        if (phoneDigits.length !== 12 || !phoneDigits.startsWith("996")) {
-            setFieldError(phoneEl, "Введите номер в формате +996 XXX XXX XXX");
-            setButtonLoading(submitBtn, false);
-            return showToast("Проверьте контактный номер", "error");
-        }
-
         const submissionCheck = canSubmitAd(user, {
             address,
             price,
@@ -2178,48 +1475,15 @@ function initAddPageForm() {
             return showToast(submissionCheck.message, "error");
         }
 
-        // Парсинг "4+" в число — храним как 4
-        const roomsRaw = document.getElementById("inputRooms")?.value || '';
-        const roomsNum = roomsRaw === '4+' ? 4 : Number(roomsRaw) || 0;
-        const roomsTag = roomsRaw === '4+' ? '4+' : (roomsNum ? String(roomsNum) : '');
-        // Документы — чекбоксы
-        const documents = Array.from(document.querySelectorAll('#inputDocumentsGroup input[type=checkbox]:checked'))
-            .map(c => c.value);
-        // Коммуникации (для участков и домов)
-        const utilities = cat === 'land'
-            ? Array.from(document.querySelectorAll('#inputUtilitiesGroup input[type=checkbox]:checked')).map(c => c.value)
-            : (cat === 'house'
-                ? Array.from(document.querySelectorAll('#inputHouseUtilitiesGroup input[type=checkbox]:checked')).map(c => c.value)
-                : []);
-        const currency = document.getElementById('inputCurrency')?.value || 'KGS';
-        const region = document.getElementById('inputRegion')?.value || '';
-        const district = document.getElementById('inputDistrict')?.value || '';
-
-        // Поля для домов
-        const landArea = cat === 'house' ? (Number(document.getElementById('inputLandArea')?.value) || 0) : 0;
-        const houseType = cat === 'house' ? (document.getElementById('inputHouseType')?.value || '') : '';
-        const houseExtras = cat === 'house'
-            ? Array.from(document.querySelectorAll('#inputHouseExtrasGroup input[type=checkbox]:checked')).map(c => c.value)
-            : [];
-
         const adDraft = {
             type: document.querySelector('input[name="dealType"]:checked')?.value || "sale",
             category: cat,
-            rooms: (cat === "flat" || cat === "house") ? roomsNum : 0,
-            roomsLabel: (cat === "flat" || cat === "house") ? roomsTag : '',
-            floor: cat === "flat" ? (Number(document.getElementById("inputFloor")?.value || 0) || null) : null,
-            totalFloors: cat === "flat" ? (Number(document.getElementById("inputTotalFloors")?.value || 0) || null) : null,
-            furniture: cat === "flat" ? (document.getElementById("inputFurniture")?.value || "") : "",
-            landArea,
-            houseType,
-            houseExtras,
+            rooms: (cat === "flat" || cat === "house") ? Number(document.getElementById("inputRooms").value || 0) : 0,
+            floor: (cat === "flat" || cat === "house") ? Number(document.getElementById("inputFloor")?.value || 0) || null : null,
+            totalFloors: (cat === "flat" || cat === "house") ? Number(document.getElementById("inputTotalFloors")?.value || 0) || null : null,
+            furniture: (cat === "flat" || cat === "house") ? (document.getElementById("inputFurniture")?.value || "") : "",
             landPurpose: cat === "land" ? (document.getElementById("inputLandPurpose")?.value || "") : "",
-            utilities,
             commerceType: cat === "commerce" ? (document.getElementById("inputCommerceType")?.value || "") : "",
-            documents,
-            currency,
-            region,
-            district,
             price,
             area,
             address,
@@ -2246,354 +1510,86 @@ function initAddPageForm() {
     });
 }
 
-// ============================================================
-// Лалафо-стиль: пакеты продвижения и оплата
-// ============================================================
-const PROMO_PACKAGES = [
-    {
-        id: 'free', icon: '🆓', name: 'Стандарт',
-        tagline: 'Базовое размещение',
-        gradient: 'linear-gradient(135deg,#a3b1c2,#7f8c8d)',
-        durations: [{ days: 30, price: 0, label: '30 дней' }],
-        features: ['Размещение в категории', 'Стандартный показ', 'Публикация после модерации']
-    },
-    {
-        id: 'featured', icon: '⭐', name: 'ТОП', badge: 'ПОПУЛЯРНО',
-        tagline: 'На главной странице',
-        gradient: 'linear-gradient(135deg,#3498db,#2980b9)',
-        durations: [
-            { days: 3, price: 199, label: '3 дня' },
-            { days: 7, price: 499, label: '7 дней', recommended: true },
-            { days: 30, price: 1499, oldPrice: 1990, label: '30 дней', discount: '-25%' }
-        ],
-        features: ['×3 больше просмотров', 'Показ на главной', 'Выше в результатах поиска']
-    },
-    {
-        id: 'vip', icon: '💎', name: 'VIP', badge: 'МАКСИМУМ',
-        tagline: 'Золотая рамка + VIP-значок',
-        gradient: 'linear-gradient(135deg,#f39c12,#e67e22)',
-        durations: [
-            { days: 7, price: 499, label: '7 дней' },
-            { days: 14, price: 899, label: '14 дней', recommended: true },
-            { days: 30, price: 1599, oldPrice: 1999, label: '30 дней', discount: '-20%' }
-        ],
-        features: ['💎 Золотая рамка VIP', 'VIP-значок на карточке', 'Подъём в поиске', 'Приоритетный показ']
-    },
-    {
-        id: 'urgent', icon: '🔥', name: 'Срочно',
-        tagline: 'Красный бейдж «Срочно»',
-        gradient: 'linear-gradient(135deg,#e74c3c,#c0392b)',
-        durations: [
-            { days: 3, price: 99, label: '3 дня' },
-            { days: 7, price: 199, label: '7 дней', recommended: true }
-        ],
-        features: ['🔥 Бейдж «Срочно»', 'Выделение красным', 'Привлекает внимание']
-    }
-];
-
-const PAY_METHODS = [
-    { id: 'card',     icon: '💳', name: 'Карта',     desc: 'Visa / MasterCard / Эл-карт' },
-    { id: 'odengi',   icon: '📱', name: 'O!Деньги',  desc: 'Кошелёк O!' },
-    { id: 'mbank',    icon: '🏦', name: 'MBank',     desc: 'Перевод по номеру' }
-];
-
 function showPackageModal(draft) {
     const modal = document.getElementById("packageModal");
     if (!modal) { submitAdWithPackage(draft, "free"); return; }
-    const sheet = modal.querySelector('.pkg-sheet');
-
-    // Рендерим карточки тарифов
-    sheet.innerHTML = `
-        <button type="button" class="pkg-x" aria-label="Закрыть">&times;</button>
-        <div class="pkg-head">
-            <div class="pkg-head-icon">🚀</div>
-            <h3>Сделайте объявление заметнее</h3>
-            <p>Платные тарифы продают объявления <b>в 3–5 раз быстрее</b></p>
-        </div>
-        <div class="pkg-tiers">
-            ${PROMO_PACKAGES.map(p => renderPackageCard(p)).join('')}
-        </div>
-        <div class="pkg-foot">
-            <i class="fas fa-shield-alt"></i> Безопасная оплата · Отмена в любой момент
-        </div>
-    `;
-
-    // Состояние выбранной длительности на карточку
-    sheet.querySelectorAll('.pkg-tier').forEach(card => {
-        const pkgId = card.dataset.pkg;
-        card.querySelectorAll('.pkg-dur').forEach(durBtn => {
-            durBtn.addEventListener('click', () => {
-                card.querySelectorAll('.pkg-dur').forEach(b => b.classList.toggle('active', b === durBtn));
-                const price = Number(durBtn.dataset.price || 0);
-                const days = Number(durBtn.dataset.days || 0);
-                card.querySelector('.pkg-cta-price').textContent = price > 0 ? `${price.toLocaleString('ru-RU')} сом` : 'Бесплатно';
-                card.querySelector('.pkg-cta')?.setAttribute('data-days', days);
-                card.querySelector('.pkg-cta')?.setAttribute('data-price', price);
-            });
-        });
-        card.querySelector('.pkg-cta')?.addEventListener('click', () => {
-            const days = Number(card.querySelector('.pkg-cta').dataset.days || 0);
-            const price = Number(card.querySelector('.pkg-cta').dataset.price || 0);
-            closePackageModal();
-            if (pkgId === 'free' || price === 0) {
-                submitAdWithPackage(draft, pkgId, { days, price });
+    modal.style.display = "flex";
+    modal.querySelectorAll("[data-pkg]").forEach((btn) => {
+        btn.onclick = () => {
+            const pkg = btn.getAttribute("data-pkg");
+            modal.style.display = "none";
+            if (pkg === "free") {
+                submitAdWithPackage(draft, pkg);
             } else {
-                showPaymentModal(draft, pkgId, { days, price });
+                showPaymentModal(draft, pkg);
             }
-        });
+        };
     });
-
-    sheet.querySelector('.pkg-x').addEventListener('click', closePackageModal);
-    modal.querySelector('.pkg-backdrop').addEventListener('click', closePackageModal);
-
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => modal.classList.add('is-open'));
+    modal.querySelector(".pkg-close")?.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
 }
 
-function renderPackageCard(p) {
-    const recommended = p.durations.find(d => d.recommended) || p.durations[0];
-    return `
-        <article class="pkg-tier ${p.id === 'free' ? 'pkg-tier--free' : ''}" data-pkg="${p.id}" style="--pkg-grad:${p.gradient};">
-            ${p.badge ? `<div class="pkg-badge">${p.badge}</div>` : ''}
-            <div class="pkg-tier-head">
-                <div class="pkg-tier-icon">${p.icon}</div>
-                <div>
-                    <div class="pkg-tier-name">${p.name}</div>
-                    <div class="pkg-tier-tagline">${p.tagline}</div>
-                </div>
-            </div>
-            <ul class="pkg-features">
-                ${p.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
-            </ul>
-            ${p.durations.length > 1 ? `
-                <div class="pkg-durations">
-                    ${p.durations.map(d => `
-                        <button type="button" class="pkg-dur ${d === recommended ? 'active' : ''}" data-days="${d.days}" data-price="${d.price}">
-                            <span class="pkg-dur-label">${d.label}</span>
-                            <span class="pkg-dur-price">
-                                ${d.oldPrice ? `<s>${d.oldPrice}</s>` : ''}
-                                <b>${d.price} c</b>
-                            </span>
-                            ${d.discount ? `<span class="pkg-dur-discount">${d.discount}</span>` : ''}
-                        </button>
-                    `).join('')}
-                </div>
-            ` : ''}
-            <button type="button" class="pkg-cta" data-days="${recommended.days}" data-price="${recommended.price}">
-                ${p.id === 'free'
-                    ? `<span>Опубликовать бесплатно</span>`
-                    : `<span>Выбрать</span><span class="pkg-cta-price">${recommended.price.toLocaleString('ru-RU')} сом</span>`}
-            </button>
-        </article>
-    `;
-}
+function showPaymentModal(draft, pkg) {
+    const modal = document.getElementById("paymentModal");
+    if (!modal) { submitAdWithPackage(draft, pkg); return; }
 
-function closePackageModal() {
-    const modal = document.getElementById('packageModal');
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    setTimeout(() => { modal.style.display = 'none'; }, 200);
-    document.body.style.overflow = '';
-}
+    const prices = { featured: "499 сом", vip: "999 сом" };
+    const names = { featured: "Пакет «На главную»", vip: "Пакет «VIP»" };
+    document.getElementById("payAmount").textContent = prices[pkg] || "";
+    document.getElementById("payPkgName").textContent = names[pkg] || "";
 
-function showPaymentModal(draft, pkg, opts = {}) {
-    const modal = document.getElementById('paymentModal');
-    if (!modal) { submitAdWithPackage(draft, pkg, opts); return; }
-    const sheet = modal.querySelector('.pay-sheet');
-    const pkgInfo = PROMO_PACKAGES.find(p => p.id === pkg);
-    const days = opts.days || (pkgInfo?.durations[0].days || 0);
-    const price = opts.price || (pkgInfo?.durations[0].price || 0);
+    const step1 = document.getElementById("payStep1");
+    const step2 = document.getElementById("payStep2");
+    const step3 = document.getElementById("payStep3");
+    step1.style.display = ""; step2.style.display = "none"; step3.style.display = "none";
 
-    sheet.innerHTML = `
-        <button type="button" class="pay-x" aria-label="Закрыть">&times;</button>
-        <div class="pay-step" data-step="1">
-            <div class="pay-summary" style="--pkg-grad:${pkgInfo?.gradient || ''};">
-                <div class="pay-summary-icon">${pkgInfo?.icon || '💳'}</div>
-                <div>
-                    <div class="pay-summary-name">${pkgInfo?.name || 'Пакет'} · ${days} дн.</div>
-                    <div class="pay-summary-tagline">${pkgInfo?.tagline || ''}</div>
-                </div>
-                <div class="pay-summary-price">${price.toLocaleString('ru-RU')} <span>сом</span></div>
-            </div>
+    const cardNum = document.getElementById("demoCardNum");
+    const cardExp = document.getElementById("demoCardExp");
+    const cardCvv = document.getElementById("demoCardCvv");
+    cardNum.value = ""; cardExp.value = ""; cardCvv.value = "";
 
-            <div class="pay-methods">
-                ${PAY_METHODS.map((m, i) => `
-                    <label class="pay-method ${i === 0 ? 'active' : ''}">
-                        <input type="radio" name="payMethod" value="${m.id}" ${i === 0 ? 'checked' : ''}>
-                        <div class="pay-method-icon">${m.icon}</div>
-                        <div class="pay-method-info">
-                            <div class="pay-method-name">${m.name}</div>
-                            <div class="pay-method-desc">${m.desc}</div>
-                        </div>
-                        <i class="fas fa-check pay-method-check"></i>
-                    </label>
-                `).join('')}
-            </div>
-
-            <div class="pay-form" data-method="card">
-                <div class="pay-field">
-                    <label>Номер карты</label>
-                    <div class="pay-card-input">
-                        <i class="far fa-credit-card pay-card-brand"></i>
-                        <input type="text" id="payCardNum" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000">
-                    </div>
-                </div>
-                <div class="pay-row">
-                    <div class="pay-field">
-                        <label>Срок</label>
-                        <input type="text" id="payCardExp" inputmode="numeric" maxlength="5" placeholder="MM/ГГ">
-                    </div>
-                    <div class="pay-field">
-                        <label>CVC</label>
-                        <input type="password" id="payCardCvv" inputmode="numeric" maxlength="3" placeholder="•••">
-                    </div>
-                </div>
-                <div class="pay-field">
-                    <label>Имя владельца</label>
-                    <input type="text" id="payCardName" placeholder="IVAN IVANOV" autocomplete="cc-name">
-                </div>
-            </div>
-
-            <div class="pay-form pay-form-wallet" data-method="wallet" style="display:none;">
-                <div class="pay-field">
-                    <label>Номер телефона кошелька</label>
-                    <input type="tel" id="payWalletPhone" placeholder="+996 555 123 456">
-                </div>
-                <p class="pay-hint"><i class="fas fa-info-circle"></i> Подтвердите оплату в приложении</p>
-            </div>
-
-            <button type="button" class="pay-submit">
-                <i class="fas fa-lock"></i>
-                <span>Оплатить ${price.toLocaleString('ru-RU')} сом</span>
-            </button>
-            <p class="pay-secure">🔒 Демо-режим · Реальные деньги не списываются</p>
-        </div>
-
-        <div class="pay-step" data-step="2" style="display:none;">
-            <div class="pay-spinner"></div>
-            <h4>Обработка платежа...</h4>
-            <p>Не закрывайте окно</p>
-        </div>
-
-        <div class="pay-step" data-step="3" style="display:none;">
-            <div class="pay-success-icon">
-                <i class="fas fa-check"></i>
-            </div>
-            <h4>Оплата прошла успешно!</h4>
-            <p>Публикуем ваше объявление...</p>
-        </div>
-    `;
-
-    // Закрытие
-    sheet.querySelector('.pay-x').addEventListener('click', closePaymentModal);
-    modal.querySelector('.pay-backdrop').addEventListener('click', closePaymentModal);
-
-    // Переключение методов оплаты
-    const methodLabels = sheet.querySelectorAll('.pay-method');
-    const cardForm = sheet.querySelector('[data-method="card"]');
-    const walletForm = sheet.querySelector('[data-method="wallet"]');
-    methodLabels.forEach(lbl => {
-        lbl.addEventListener('click', () => {
-            methodLabels.forEach(l => l.classList.remove('active'));
-            lbl.classList.add('active');
-            const method = lbl.querySelector('input').value;
-            const isCard = method === 'card';
-            cardForm.style.display = isCard ? '' : 'none';
-            walletForm.style.display = isCard ? 'none' : '';
-        });
-    });
-
-    // Маска карты
-    const cardNum = sheet.querySelector('#payCardNum');
-    const cardExp = sheet.querySelector('#payCardExp');
-    const cardCvv = sheet.querySelector('#payCardCvv');
-    const brandIcon = sheet.querySelector('.pay-card-brand');
-    cardNum?.addEventListener('input', () => {
-        let v = cardNum.value.replace(/\D/g, '').slice(0, 16);
-        cardNum.value = v.replace(/(\d{4})(?=\d)/g, '$1 ');
-        // Brand detection
-        const first = v[0];
-        brandIcon.className = 'fab pay-card-brand ' + (
-            first === '4' ? 'fa-cc-visa' :
-            first === '5' ? 'fa-cc-mastercard' :
-            first === '3' ? 'fa-cc-amex' : ''
-        );
-        if (!first) brandIcon.className = 'far fa-credit-card pay-card-brand';
-    });
-    cardExp?.addEventListener('input', () => {
-        let v = cardExp.value.replace(/\D/g, '').slice(0, 4);
-        if (v.length >= 3) v = v.slice(0, 2) + '/' + v.slice(2);
+    cardNum.oninput = () => {
+        let v = cardNum.value.replace(/\D/g, "").slice(0, 16);
+        cardNum.value = v.replace(/(\d{4})(?=\d)/g, "$1 ");
+    };
+    cardExp.oninput = () => {
+        let v = cardExp.value.replace(/\D/g, "").slice(0, 4);
+        if (v.length >= 3) v = v.slice(0, 2) + "/" + v.slice(2);
         cardExp.value = v;
-    });
-    cardCvv?.addEventListener('input', () => { cardCvv.value = cardCvv.value.replace(/\D/g, '').slice(0, 3); });
+    };
+    cardCvv.oninput = () => { cardCvv.value = cardCvv.value.replace(/\D/g, "").slice(0, 3); };
 
-    // Сабмит
-    sheet.querySelector('.pay-submit').addEventListener('click', () => {
-        const method = sheet.querySelector('input[name=payMethod]:checked').value;
-        let valid = true;
-        if (method === 'card') {
-            const num = (cardNum?.value || '').replace(/\s/g, '');
-            if (num.length < 16) { cardNum.classList.add('pay-err'); valid = false; } else cardNum.classList.remove('pay-err');
-            if ((cardExp?.value || '').length < 5) { cardExp.classList.add('pay-err'); valid = false; } else cardExp.classList.remove('pay-err');
-            if ((cardCvv?.value || '').length < 3) { cardCvv.classList.add('pay-err'); valid = false; } else cardCvv.classList.remove('pay-err');
-        } else {
-            const phone = sheet.querySelector('#payWalletPhone');
-            if ((phone?.value || '').replace(/\D/g, '').length < 9) { phone.classList.add('pay-err'); valid = false; } else phone.classList.remove('pay-err');
-        }
-        if (!valid) return;
+    modal.style.display = "flex";
 
-        // Анимация: шаги 2 → 3
-        const s1 = sheet.querySelector('[data-step="1"]');
-        const s2 = sheet.querySelector('[data-step="2"]');
-        const s3 = sheet.querySelector('[data-step="3"]');
-        s1.style.display = 'none'; s2.style.display = '';
+    document.getElementById("payModalClose").onclick = () => { modal.style.display = "none"; };
+
+    document.getElementById("paySubmitBtn").onclick = () => {
+        const num = cardNum.value.replace(/\s/g, "");
+        const exp = cardExp.value;
+        const cvv = cardCvv.value;
+        if (num.length < 16) { cardNum.style.borderColor = "#e74c3c"; cardNum.focus(); return; }
+        if (exp.length < 5) { cardExp.style.borderColor = "#e74c3c"; cardExp.focus(); return; }
+        if (cvv.length < 3) { cardCvv.style.borderColor = "#e74c3c"; cardCvv.focus(); return; }
+        cardNum.style.borderColor = ""; cardExp.style.borderColor = ""; cardCvv.style.borderColor = "";
+
+        step1.style.display = "none"; step2.style.display = "";
         setTimeout(() => {
-            s2.style.display = 'none'; s3.style.display = '';
+            step2.style.display = "none"; step3.style.display = "";
             setTimeout(() => {
-                closePaymentModal();
-                submitAdWithPackage(draft, pkg, { days, price, paymentMethod: method });
+                modal.style.display = "none";
+                submitAdWithPackage(draft, pkg);
             }, 1400);
-        }, 1800);
-    });
-
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => modal.classList.add('is-open'));
+        }, 2000);
+    };
 }
 
-function closePaymentModal() {
-    const modal = document.getElementById('paymentModal');
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    setTimeout(() => { modal.style.display = 'none'; }, 200);
-    document.body.style.overflow = '';
-}
-
-async function submitAdWithPackage(draft, pkg, opts = {}) {
+async function submitAdWithPackage(draft, pkg) {
     const submitBtn = document.querySelector("#createAdForm button[type='submit']");
     if (submitBtn) setButtonLoading(submitBtn, true, "Публикация...");
 
-    if (pkg && pkg !== 'free') {
-        draft.packageRequested = pkg;
-        draft.packageDays = opts.days || 0;
-        draft.packagePrice = opts.price || 0;
-        if (opts.paymentMethod) draft.paymentMethod = opts.paymentMethod;
-        if (opts.days) {
-            draft.boostedUntil = new Date(Date.now() + opts.days * 86400000).toISOString();
-        }
-        // Проставляем флаги пакета сразу, чтобы после одобрения модерацией
-        // объявление появилось на главной/с VIP-значком автоматически
-        draft.paidPlacement = true;
-        if (pkg === 'featured') {
-            draft.featuredOnHome = true;
-        } else if (pkg === 'vip') {
-            draft.vip = true;
-            draft.featuredOnHome = true;
-        } else if (pkg === 'urgent') {
-            draft.urgent = true;
-        }
-    }
+    if (pkg === "featured") { draft.packageRequested = "featured"; }
+    if (pkg === "vip") { draft.packageRequested = "vip"; }
 
     try {
         const docId = await createAdInFirestore(draft);
@@ -2603,11 +1599,12 @@ async function submitAdWithPackage(draft, pkg, opts = {}) {
             storage.setAds(localAds);
         } catch (e) {}
 
-        const pkgInfo = (typeof PROMO_PACKAGES !== 'undefined') ? PROMO_PACKAGES.find(p => p.id === pkg) : null;
         if (pkg === "free") {
             showToast("Объявление отправлено на модерацию", "success");
-        } else if (pkgInfo) {
-            showToast(`Объявление отправлено! Пакет «${pkgInfo.name}» активируется после подтверждения оплаты.`, "success");
+        } else if (pkg === "featured") {
+            showToast("Объявление отправлено! Для активации пакета «На главную» свяжитесь с администратором.", "success");
+        } else if (pkg === "vip") {
+            showToast("Объявление отправлено! Для активации VIP пакета свяжитесь с администратором.", "success");
         }
         showConfetti();
         setTimeout(() => { window.location.href = "profile.html"; }, 1800);
@@ -3012,52 +2009,6 @@ function initProfile() {
     renderHeader();
     initPaymentModal();
     renderAds("active");
-
-    // Мобильное dropdown меню для вкладок
-    const tabsContainer = document.querySelector('.tabs-container');
-    if (tabsContainer && window.innerWidth <= 600) {
-        const tabButtons = tabsContainer.querySelectorAll('.tab-btn');
-        const tabsData = Array.from(tabButtons).map(btn => ({
-            text: btn.textContent.trim(),
-            tab: btn.getAttribute('onclick')?.match(/switchTab\('(\w+)'\)/)?.[1]
-        }));
-
-        // Создаём dropdown кнопку
-        const dropdownBtn = document.createElement('button');
-        dropdownBtn.className = 'tabs-dropdown-btn';
-        dropdownBtn.textContent = tabsData[0]?.text || 'Выберите раздел';
-        tabsContainer.prepend(dropdownBtn);
-
-        // Создаём dropdown меню
-        const dropdownMenu = document.createElement('div');
-        dropdownMenu.className = 'tabs-dropdown-menu';
-        tabsData.forEach((tab, index) => {
-            const item = document.createElement('button');
-            item.className = 'tabs-dropdown-item' + (index === 0 ? ' active' : '');
-            item.textContent = tab.text;
-            item.onclick = () => {
-                dropdownBtn.textContent = tab.text;
-                dropdownMenu.classList.remove('show');
-                document.querySelectorAll('.tabs-dropdown-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-                if (tab.tab) switchTab(tab.tab);
-            };
-            dropdownMenu.appendChild(item);
-        });
-        tabsContainer.appendChild(dropdownMenu);
-
-        // Показываем/скрываем меню при клике на кнопку
-        dropdownBtn.onclick = () => {
-            dropdownMenu.classList.toggle('show');
-        };
-
-        // Закрываем меню при клике вне его
-        document.addEventListener('click', (e) => {
-            if (!tabsContainer.contains(e.target)) {
-                dropdownMenu.classList.remove('show');
-            }
-        });
-    }
 }
 
 let _adminCurrentAds = [];
@@ -3384,8 +2335,6 @@ function resetFilters() {
         furniture: '',
         sort: 'newest'
     };
-    // Сброс региона/района
-    if (typeof setRegionDistrict === 'function') setRegionDistrict('', '', false);
     updateFbarBadge();
     currentPage = 1;
     renderListings();
@@ -3416,8 +2365,8 @@ function filterListings(listings) {
             }
         }
         
-        // Фильтр по региону / району (новая лалафо-логика)
-        if (!adMatchesRegionDistrict(listing)) {
+        // Фильтр по району
+        if (currentFilters.district && listing.district !== currentFilters.district) {
             return false;
         }
         
@@ -3743,7 +2692,7 @@ function loadChatList() {
                 const lastAt = normalizeFirestoreTs(chat.lastMessageAt || chat.lastActivity);
 
                 return `
-                    <div class="chat-item ${chat.id === currentChatId ? 'active' : ''}" data-chat-id="${chat.id}" data-other-uid="${otherParticipantId || ''}" onclick="openChat('${chat.id}', this)">
+                    <div class="chat-item ${chat.id === currentChatId ? 'active' : ''}" data-chat-id="${chat.id}" onclick="openChat('${chat.id}', this)">
                         <div class="chat-avatar">
                             ${otherParticipant?.name?.charAt(0)?.toUpperCase() || 'U'}
                         </div>
@@ -3830,8 +2779,6 @@ function loadChatMessages(chat) {
         const chatData = snap.data() || {};
         const otherParticipantId = (chatData.participants || []).find((id) => id !== uid);
         const otherParticipant = getUserById(otherParticipantId);
-        const hdr = document.querySelector('.chat-conversation-header');
-        if (hdr) hdr.dataset.otherUid = otherParticipantId || '';
         if (avatar) avatar.textContent = otherParticipant?.name?.charAt(0)?.toUpperCase() || 'U';
         if (title) title.textContent = otherParticipant?.name || 'Пользователь';
     }).catch(() => {});
@@ -3912,26 +2859,8 @@ async function sendMessage(event, chatId) {
 
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
-
+    
     if (!text) return;
-
-    // Оптимистичный UI: показываем сообщение СРАЗУ до Firestore
-    const messagesContainer = document.getElementById('chatMessages');
-    if (messagesContainer) {
-        const tempMsgId = 'temp-' + Date.now();
-        const tempHTML = createMessageHTML({
-            id: tempMsgId,
-            senderId: uid,
-            text: text,
-            timestampMs: Date.now(),
-            readBy: [uid]
-        }, uid);
-        messagesContainer.insertAdjacentHTML('beforeend', tempHTML);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    // Очищаем поле ввода СРАЗУ
-    input.value = '';
 
     try {
         const msg = {
@@ -3950,11 +2879,6 @@ async function sendMessage(event, chatId) {
         }, { merge: true });
     } catch (e) {
         console.error('sendMessage error:', e);
-        // Удаляем временное сообщение при ошибке
-        const tempMsg = messagesContainer?.querySelector(`[data-temp-id="temp-${Date.now()}"]`);
-        if (tempMsg) tempMsg.remove();
-        input.value = text; // Восстанавливаем текст
-
         const code = String(e?.code || e?.message || '');
         if (code.includes('permission-denied')) {
             showToast('Нет прав на отправку. Проверь правила Firestore', 'error');
@@ -3963,7 +2887,11 @@ async function sendMessage(event, chatId) {
         } else {
             showToast('Ошибка отправки: ' + (e?.message || 'неизвестная ошибка'), 'error');
         }
+        return;
     }
+
+    // Очищаем поле ввода
+    input.value = '';
 }
 
 async function createChatWithUser(userId, adId = null) {
@@ -4034,64 +2962,9 @@ function formatMessageTime(timestamp) {
     return date.toLocaleDateString('ru-RU');
 }
 
-// Кэш пользователей из Firestore (id -> {id, name, ...})
-const remoteUserCache = {};
-const pendingUserFetches = {};
-
 function getUserById(userId) {
-    if (!userId) return null;
-    // Кэш Firestore
-    if (remoteUserCache[userId]) return remoteUserCache[userId];
-    // Локальное хранилище (текущий пользователь)
     const users = storage.getUsers();
-    const local = users.find(u => u.id === userId);
-    if (local) return local;
-    // Запускаем асинхронную загрузку из Firestore (но не блокируем рендер)
-    fetchRemoteUser(userId);
-    return null;
-}
-
-async function fetchRemoteUser(userId) {
-    if (!userId || remoteUserCache[userId] || pendingUserFetches[userId]) return;
-    const db = getFirebaseServices()?.db;
-    if (!db) return;
-    pendingUserFetches[userId] = true;
-    try {
-        const snap = await db.collection('users').doc(userId).get();
-        if (snap.exists) {
-            remoteUserCache[userId] = { id: userId, ...snap.data() };
-            refreshChatUIForUser(userId);
-        }
-    } catch (e) {
-        // игнорируем
-    } finally {
-        delete pendingUserFetches[userId];
-    }
-}
-
-// Перерисовывает видимые элементы чата, где упоминается этот пользователь
-function refreshChatUIForUser(userId) {
-    const user = remoteUserCache[userId];
-    if (!user) return;
-    const name = user.name || 'Пользователь';
-    const initial = (user.name?.charAt(0) || 'U').toUpperCase();
-
-    // Заголовок открытого чата
-    const header = document.querySelector('.chat-conversation-header');
-    if (header && header.dataset.otherUid === userId) {
-        const titleEl = header.querySelector('h3');
-        const avatarEl = header.querySelector('.chat-avatar');
-        if (titleEl) titleEl.textContent = name;
-        if (avatarEl) avatarEl.textContent = initial;
-    }
-
-    // Элементы списка чатов
-    document.querySelectorAll(`.chat-item[data-other-uid="${userId}"]`).forEach(item => {
-        const nameEl = item.querySelector('.chat-name');
-        const avatarEl = item.querySelector('.chat-avatar');
-        if (nameEl) nameEl.textContent = name;
-        if (avatarEl) avatarEl.textContent = initial;
-    });
+    return users.find(u => u.id === userId);
 }
 
 function getUnreadMessageCount() {
@@ -4606,14 +3479,11 @@ function nextRegistrationStep() {
 
             document.getElementById('displayEmail').textContent = email;
 
-            // Запоминаем для кнопки "Открыть почту" и "Отправить повторно"
-            window.__pendingVerifyEmail = email;
-            // НЕ делаем signOut сразу — иначе resend не сможет получить currentUser.
-            // Выход произойдёт автоматически при переходе на login.html (см. handleLogin).
-            // Но блокируем доступ к профилю — флагом в localStorage
-            sessionStorage.setItem('osh_pending_verify', '1');
+            // Вариант A: не пускаем без подтверждения
+            await auth.signOut();
+            storage.clearCurrentUser();
 
-            showToast('Мы отправили письмо для подтверждения. Проверь почту (включая «Спам»).', 'success');
+            showToast('Мы отправили письмо для подтверждения. Подтверди email и войди.', 'success');
         })
         .catch((err) => {
             const code = err?.code || '';
@@ -4654,9 +3524,6 @@ function initLogin() {
             handleLogin();
         });
     }
-    // Кнопка Google на странице логина
-    const googleBtn = document.getElementById('googleSignInBtn');
-    if (googleBtn) googleBtn.addEventListener('click', signInWithGoogle);
 }
 
 function handleLogin() {
@@ -4727,141 +3594,14 @@ function handleLogin() {
 function initRegister() {
     const registerForm = document.getElementById('registerForm');
     if (!registerForm) return;
-
-    // Обработчик для поля пароля
+    
+    // Добавляем обработчик для поля пароля
     const regPass = document.getElementById('regPass');
     if (regPass) {
         regPass.addEventListener('input', (e) => {
             checkPasswordStrength(e.target.value);
         });
     }
-
-    // Кнопка Google
-    const googleBtn = document.getElementById('googleSignInBtn');
-    if (googleBtn) googleBtn.addEventListener('click', signInWithGoogle);
-
-    // Кнопка "Открыть почту"
-    const openMailBtn = document.getElementById('btnOpenMail');
-    if (openMailBtn) {
-        openMailBtn.addEventListener('click', () => {
-            const email = window.__pendingVerifyEmail || document.getElementById('displayEmail')?.textContent || '';
-            const url = getMailProviderUrl(email);
-            window.open(url, '_blank');
-        });
-    }
-
-    // Кнопка "Отправить повторно"
-    const resendLink = document.getElementById('resendVerifyLink');
-    if (resendLink) resendLink.addEventListener('click', (e) => { e.preventDefault(); resendVerificationEmail(); });
-}
-
-// ====== Google Sign-In ======
-async function signInWithGoogle() {
-    const services = getFirebaseServices();
-    if (!services) { showToast('Firebase не подключен', 'error'); return; }
-    const { auth, db } = services;
-
-    const btn = document.getElementById('googleSignInBtn');
-    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
-
-    try {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: 'select_account' });
-        const cred = await auth.signInWithPopup(provider);
-        const user = cred.user;
-
-        // Создаём/обновляем профиль в Firestore
-        const userRef = db.collection('users').doc(user.uid);
-        const snap = await userRef.get();
-        if (!snap.exists) {
-            await userRef.set({
-                name: user.displayName || 'Пользователь',
-                email: user.email,
-                phone: user.phoneNumber || '',
-                photoURL: user.photoURL || '',
-                provider: 'google',
-                verified: true,
-                createdAt: new Date().toISOString()
-            });
-        } else {
-            await userRef.set({
-                name: user.displayName || snap.data().name,
-                photoURL: user.photoURL || snap.data().photoURL || '',
-                provider: 'google'
-            }, { merge: true });
-        }
-
-        await syncCurrentUserFromFirebase();
-        sessionStorage.removeItem('osh_pending_verify');
-        showToast('Вход выполнен через Google!', 'success');
-        setTimeout(() => { window.location.href = 'profile.html'; }, 700);
-    } catch (err) {
-        const code = err?.code || '';
-        if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
-            // тихо игнорируем — пользователь сам закрыл
-        } else if (code === 'auth/unauthorized-domain') {
-            showToast('Домен не разрешён. Добавьте github.io в Firebase → Authentication → Settings → Authorized domains', 'error');
-        } else if (code === 'auth/popup-blocked') {
-            showToast('Браузер заблокировал всплывающее окно. Разрешите всплывающие окна и повторите.', 'error');
-        } else if (code === 'auth/account-exists-with-different-credential') {
-            showToast('Этот email уже зарегистрирован с другим способом входа', 'error');
-        } else {
-            showToast('Ошибка входа через Google. Попробуйте позже.', 'error');
-        }
-    } finally {
-        if (btn) { btn.disabled = false; btn.style.opacity = ''; }
-    }
-}
-
-// ====== Повторная отправка письма верификации ======
-async function resendVerificationEmail() {
-    const services = getFirebaseServices();
-    if (!services) { showToast('Firebase не подключен', 'error'); return; }
-    const { auth } = services;
-    const user = auth.currentUser;
-    if (!user) {
-        showToast('Сессия истекла. Зарегистрируйтесь снова.', 'error');
-        return;
-    }
-    const link = document.getElementById('resendVerifyLink');
-    const timer = document.getElementById('resendTimer');
-    try {
-        await user.sendEmailVerification();
-        showToast('Письмо отправлено повторно ✓ Проверьте «Спам»', 'success');
-        // Кулдаун 60 сек
-        if (link) link.style.pointerEvents = 'none';
-        if (link) link.style.opacity = '0.5';
-        let left = 60;
-        if (timer) { timer.style.display = 'inline'; timer.textContent = ` (через ${left} сек)`; }
-        const t = setInterval(() => {
-            left--;
-            if (timer) timer.textContent = ` (через ${left} сек)`;
-            if (left <= 0) {
-                clearInterval(t);
-                if (timer) timer.style.display = 'none';
-                if (link) { link.style.pointerEvents = ''; link.style.opacity = ''; }
-            }
-        }, 1000);
-    } catch (err) {
-        const code = err?.code || '';
-        if (code.includes('too-many-requests')) {
-            showToast('Слишком много запросов. Подождите 1-2 минуты.', 'error');
-        } else {
-            showToast('Не удалось отправить. Попробуйте позже.', 'error');
-        }
-    }
-}
-
-// ====== Открыть почту: распознаём провайдера ======
-function getMailProviderUrl(email) {
-    const domain = (email || '').split('@')[1]?.toLowerCase() || '';
-    if (domain.includes('gmail.') || domain.includes('googlemail.')) return 'https://mail.google.com';
-    if (domain.includes('yandex.') || domain.includes('ya.ru')) return 'https://mail.yandex.ru';
-    if (domain.includes('mail.ru') || domain.includes('inbox.ru') || domain.includes('list.ru') || domain.includes('bk.ru')) return 'https://mail.ru';
-    if (domain.includes('outlook.') || domain.includes('hotmail.') || domain.includes('live.')) return 'https://outlook.live.com';
-    if (domain.includes('icloud.') || domain.includes('me.com')) return 'https://www.icloud.com/mail';
-    if (domain.includes('proton.') || domain.includes('protonmail.')) return 'https://mail.proton.me';
-    return `https://${domain || 'gmail.com'}`;
 }
 
 window.togglePassword = function togglePassword(inputId) {
@@ -5323,10 +4063,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (page === "land") renderFilteredList(["land"], "category-only");
         if (page === "commerce") renderFilteredList(["commerce"], "category-only");
         if (page === "rent") renderFilteredList(["flat", "house", "commerce"], "rent");
-        // Умные фильтры: валюта, комнаты (segmented), документы, land/commerce поля
-        upgradeListingFilters();
-        // Лалафо-стиль: фильтр "Регион и район"
-        initRegionFilterUI();
     };
 
     const services = getFirebaseServices();
