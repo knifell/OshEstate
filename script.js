@@ -44,8 +44,7 @@ const OSH_REGIONS = [
             'Будалык', 'Кызыл-Эшме', 'Конур-Дөбө', 'Таш-Булак', 'Кулчу',
             'Ачык-Суу', 'Иркештам', 'Талдык', 'Ак-Босого', 'Кызыл-Шарк',
             'Арчалуу', 'Төлөйкөн', 'Кара-Кабак', 'Кара-Тейит',
-            'Мырзаке', 'Айдар-Кен', 'Жаңы-Алай', 'Алайкуу', 'Бюлөлү',
-            'Чалма', 'Ылай-Талаа', 'Жылкол', 'Ара-Булак', 'Шаркыратма'
+            'Мырзаке', 'Айдар-Кен', 'Жаңы-Алай'
         ]
     },
     {
@@ -57,27 +56,7 @@ const OSH_REGIONS = [
             'Мырза-Аке', 'Мадыкөз', 'Карабагыш', 'Жаңы-Айыл', 'Күлбала',
             'Бек-Абад', 'Шур-Абад', 'Жаңы-Жол', 'Бүргөндү', 'Төө-Моюн',
             'Жаш-Тилек', 'Кыргыз-Кыштак', 'Ак-Жар', 'Достук',
-            'Шаркыратма', 'Жалпак-Таш', 'Күлбала-Сай', 'Пахтачы', 'Алля-Анаров',
-            'Маданият', 'Гүлстан', 'Фрунзе', 'Беш-Коргон', 'Бостон',
-            'Чоң-Кыштоо', 'Нойгут', 'Кожо-Арык', 'Ак-Чал', 'Баглан',
-            'Кош-Дөбө', 'Кызыл-Булак', 'Абшыр-Ата', 'Арык-Тейит', 'Кулуштан',
-            'Ынтымак', 'Беш-Буркан', 'Арык-Бою', 'Дөң-Маала', 'Акшар',
-            'Челекчи', 'Ничке-Суу', 'Жаңы-Ноокат', 'Кызыл-Тейит', 'Темир-Корук',
-            'Дөң-Кыштак', 'Жандама', 'Катта-Тал', 'Күңгөй-Хасана', 'Мончок-Дөбө',
-            'Тескей', 'Бел', 'Кайрагач', 'Жаш', 'Исанов', 'Жар-Коргон',
-            'Федоров', 'Чеч-Дөбө', 'Кожоке', 'Кичик-Алай', 'Кулатов',
-            'Кенеш', 'Кыргыз-Ата', 'Өсөр', 'Айбек', 'Ак-Чабуу',
-            'Интернационал', 'Караке', 'Коммунизм', 'Таштак', 'Үч-Бай',
-            'Чучук', 'Ятан', 'Калдай', 'Кашкалдак', 'Атамерек',
-            'Шарк', 'Жаңы-Кыштак', 'Тепе-Коргон', 'Кек-Бел', 'Яр-Кыштак',
-            'Кургак-Көл', 'Көтөрмө', 'Кызыл-Дыйкан', 'Ден-Булак', 'Сары-Кашка',
-            'Сай', 'Тогуз-Булак', 'Кысык', 'Чий-Талаа', 'Жазы',
-            'Беш-Бала', 'Кенгеш', 'Додан', 'Киров', 'Аюу',
-            'Көндүк', 'Ак-Терек', 'Байкашка-Терек', 'Папан', 'Барын',
-            'Октябрь', 'Борбаш', 'Кыргыз-Чек', 'Мырза-Аке', 'Жалпак-Таш',
-            'Куршаб', 'Салам-Алик', 'Дароот-Коргон', 'Сары-Таш', 'Гүлчө',
-            'Жошолун', 'Конур-Дөбө', 'Кабылан-Кол', 'Корул', 'Ленин',
-            'Сары-Могол', 'Талды-Суу', 'Уч-Дөбө'
+            'Шаркыратма', 'Жалпак-Таш', 'Күлбала-Сай'
         ]
     },
     {
@@ -90,15 +69,7 @@ const OSH_REGIONS = [
             'Кош-Булак', 'Капчыгай', 'Ылай-Саз', 'Жаңы-Жол',
             'Кылжыр', 'Каранды', 'Кара-Бак', 'Эгиз-Тал',
             'Каракулжа-Ата', 'Ак-Татыр', 'Жекенди', 'Ачы-Таш',
-            'Бел-Алды', 'Чалма', 'Кара-Шоро', 'Ак-Босого', 'Ак-Джай',
-            'Ак-Талаа', 'Алмалы', 'Алтын-Мазар', 'Арзыкулов', 'Арча-Булак',
-            'Арал', 'Аскалы', 'Аю-Тапан', 'Боз', 'Бор-Добо', 'Бортумшук',
-            'Геджиге', 'Джаны-Турмуш', 'Джергетал', 'Жол-Жылга', 'Икизяк',
-            'Им.Гагарина', 'Иркештам', 'Кайнама', 'Кара-Суу', 'Карагансай',
-            'Кара-Киндик', 'Кара-Шыбак', 'Кок-Булак', 'Кок-Добо', 'Кек-Суу',
-            'Кел-Чаты', 'Колдук', 'Кеен-Джылга', 'Кичи-Буюлу', 'Кичи-Каракол',
-            'Кошулуш', 'Кун-Элек', 'Кум-Шоро', 'Кургак', 'Кызыл-Ала',
-            'Кызыл-Булак', 'Кызыл-Колот'
+            'Бел-Алды', 'Чалма', 'Кара-Шоро'
         ]
     },
     {
@@ -113,11 +84,7 @@ const OSH_REGIONS = [
             'Бейшеке', 'Ленин айылы', 'Озгор', 'Чек', 'Мады-Ордо',
             'Кулунду', 'Кара-Таш', 'Жапалак', 'Кызыл-Жар', 'Фуркат',
             'Ылайлуу-Талаа', 'Жаңы-Турмуш', 'Ак-Буура', 'Найман',
-            'Кыргыз-Чек', 'Кара-Жыгач', 'Төө-Моюн', 'Төлөйкөн', 'Ак-Жар',
-            'Ак-Кудук', 'Ак-Терек', 'Алым-Тепе', 'Авлетим', 'Бакай-Ата',
-            'Бактүү-Долоноту', 'Боо-Терек', 'Бостери', 'Бөрү', 'Буйга',
-            'Чат', 'Чоң-Сары-Ой', 'Чым-Коргон', 'Жылы-Суу', 'Калба',
-            'Кара-Булак', 'Кара-Кочкор', 'Көк-Сай', 'Колот', 'Көпүрө-Базар'
+            'Кыргыз-Чек', 'Кара-Жыгач', 'Төө-Моюн', 'Төлөйкөн'
         ]
     },
     {
@@ -132,52 +99,7 @@ const OSH_REGIONS = [
             'Мырза-Арык', 'Тон-Моюн', 'Чапаев', 'Жыйыр-Маа',
             'Он-Төрт', 'Кыргыз-Ата-Арык', 'Кум-Бел', 'Ак-Таш',
             'Ленин айылы', 'Көк-Арт', 'Кашка-Жол', 'Жаңы-Жол',
-            'Аркыт', 'Жооку', 'Сары-Булак', 'Жаңы-Абад', 'Кашкар-Кыштак',
-            'Кызыл-Кыштак', 'Дыйкан-Кыштак', 'Отузадыр', 'Жаңарык', 'Найман',
-            'Озгөрүш', 'Чимбай', 'Красный Маяк', 'Карамык', 'Кызыл-Туу',
-            'Джаны-Абад', 'Сары-Камыш', 'Толук', 'Жаңы-Жол', 'Сулайман-Тоо',
-            'Курманжан-Датка', 'Жаңы-Маала', 'Жим', 'Жийделик', 'Имам-Ата',
-            'Ак-Буура', 'Качыбек', 'Мээркан', 'Татар', 'Арык-Уулу',
-            'Гулистан', 'Ара-Булак', 'Кой-Таш', 'Кутурган', 'Кайрат',
-            'Кызыл-Байрак', 'Тегене', 'Торук', 'Дедемель', 'Жаңы-Айыл',
-            'Кашкаркыштак', 'Дыйканкыштак', 'Ылай-Талаа', 'Алмалык', 'Арек',
-            'Жапалак', 'Керме-Тоо', 'Кеңеш', 'Өзгүр', 'Орке',
-            'Пятилетка', 'Төлөйкөн', 'Тээке', 'Гүлбаар-Төлөйкөн', 'Араван',
-            'Пахтачы', 'Чек-Абад', 'Алля-Анаров', 'Маданият', 'Гүлстан',
-            'Фрунзе', 'Беш-Коргон', 'Бостон', 'Чоң-Кыштоо', 'Кара-Таш',
-            'Нойгут', 'Кожо-Арык', 'Ак-Чал', 'Баглан', 'Кош-Дөбө',
-            'Кызыл-Булак', 'Абшыр-Ата', 'Арык-Тейит', 'Кулуштан', 'Ынтымак',
-            'Беш-Буркан', 'Арык-Бою', 'Дөң-Маала', 'Акшар', 'Таш-Булак',
-            'Челекчи', 'Ничке-Суу', 'Жаңы-Ноокат', 'Кызыл-Тейит', 'Темир-Корук',
-            'Дөң-Кыштак', 'Жандама', 'Катта-Тал', 'Күңгөй-Хасана', 'Мончок-Дөбө',
-            'Тескей', 'Бел', 'Кайрагач', 'Жаш', 'Исанов', 'Жар-Коргон',
-            'Федоров', 'Чеч-Дөбө', 'Кожоке', 'Кичик-Алай', 'Кулатов',
-            'Кенеш', 'Кыргыз-Ата', 'Өсөр', 'Айбек', 'Ак-Чабуу',
-            'Интернационал', 'Караке', 'Коммунизм', 'Таштак', 'Үч-Бай',
-            'Чучук', 'Ятан', 'Калдай', 'Кашкалдак', 'Атамерек',
-            'Шарк', 'Жаңы-Кыштак', 'Тепе-Коргон', 'Кек-Бел', 'Яр-Кыштак',
-            'Кургак-Көл', 'Көтөрмө', 'Кызыл-Дыйкан', 'Ден-Булак', 'Сары-Кашка',
-            'Сай', 'Тогуз-Булак', 'Кысык', 'Чий-Талаа', 'Жазы',
-            'Беш-Бала', 'Кенгеш', 'Додан', 'Киров', 'Аюу',
-            'Көндүк', 'Ак-Терек', 'Байкашка-Терек', 'Папан', 'Барын',
-            'Октябрь', 'Борбаш', 'Кыргыз-Чек', 'Мырза-Аке', 'Жалпак-Таш',
-            'Куршаб', 'Салам-Алик', 'Дароот-Коргон', 'Сары-Таш', 'Гүлчө',
-            'Жошолун', 'Конур-Дөбө', 'Кабылан-Кол', 'Корул', 'Ленин',
-            'Сары-Могол', 'Талды-Суу', 'Уч-Дөбө', 'Будалык', 'Бюлөлү',
-            'Жаңы-Алай', 'Алайкуу', 'Чалма', 'Ылай-Талаа', 'Жылкол',
-            'Ара-Булак', 'Шаркыратма', 'Ак-Босого', 'Ак-Джай', 'Ак-Талаа',
-            'Алмалы', 'Алтын-Мазар', 'Арзыкулов', 'Арча-Булак', 'Арал',
-            'Аскалы', 'Аю-Тапан', 'Боз', 'Бор-Добо', 'Бортумшук',
-            'Геджиге', 'Джаны-Турмуш', 'Джергетал', 'Жол-Жылга', 'Икизяк',
-            'Им.Гагарина', 'Иркештам', 'Кайнама', 'Кара-Суу', 'Карагансай',
-            'Кара-Киндик', 'Кара-Шыбак', 'Кок-Булак', 'Кок-Добо', 'Кек-Суу',
-            'Кел-Чаты', 'Колдук', 'Кеен-Джылга', 'Кичи-Буюлу', 'Кичи-Каракол',
-            'Кошулуш', 'Кун-Элек', 'Кум-Шоро', 'Кургак', 'Кызыл-Ала',
-            'Кызыл-Булак', 'Кызыл-Колот', 'Ак-Жар', 'Ак-Кудук', 'Ак-Терек',
-            'Алым-Тепе', 'Авлетим', 'Бакай-Ата', 'Бактүү-Долоноту', 'Боо-Терек',
-            'Бостери', 'Бөрү', 'Буйга', 'Чат', 'Чоң-Сары-Ой',
-            'Чым-Коргон', 'Жылы-Суу', 'Калба', 'Кара-Булак', 'Кара-Кочкор',
-            'Көк-Сай', 'Колот', 'Көпүрө-Базар'
+            'Аркыт', 'Жооку', 'Сары-Булак'
         ]
     },
     {
@@ -446,71 +368,6 @@ function applyContextVisibility() {
     });
 }
 
-// Инициализация умного поиска с автодополнением
-function initSmartSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const searchDropdown = document.getElementById('searchDropdown');
-    if (!searchInput || !searchDropdown) return;
-
-    // Собираем все локации из OSH_REGIONS
-    const allLocations = [];
-    OSH_REGIONS.forEach(region => {
-        allLocations.push({ type: 'Регион', name: region.name });
-        region.districts.forEach(district => {
-            allLocations.push({ type: 'Район/Село', name: district });
-        });
-    });
-
-    let debounceTimer;
-
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        
-        clearTimeout(debounceTimer);
-        
-        if (query.length < 1) {
-            searchDropdown.style.display = 'none';
-            return;
-        }
-
-        debounceTimer = setTimeout(() => {
-            const filtered = allLocations.filter(loc => 
-                loc.name.toLowerCase().includes(query)
-            ).slice(0, 10); // Показываем максимум 10 результатов
-
-            if (filtered.length === 0) {
-                searchDropdown.style.display = 'none';
-                return;
-            }
-
-            searchDropdown.innerHTML = filtered.map(loc => `
-                <div class="search-dropdown-item" data-value="${loc.name}">
-                    <div class="type">${loc.type}</div>
-                    <div class="name">${loc.name}</div>
-                </div>
-            `).join('');
-
-            searchDropdown.style.display = 'block';
-
-            // Обработка клика на подсказку
-            searchDropdown.querySelectorAll('.search-dropdown-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    searchInput.value = item.dataset.value;
-                    searchDropdown.style.display = 'none';
-                    applyFilters();
-                });
-            });
-        }, 300);
-    });
-
-    // Скрываем dropdown при клике вне
-    document.addEventListener('click', (e) => {
-        if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
-            searchDropdown.style.display = 'none';
-        }
-    });
-}
-
 // Инициализация модалки "Регион/район" (лалафо-стиль)
 function initRegionFilterUI() {
     const select = document.getElementById('districtFilter');
@@ -535,9 +392,8 @@ function initRegionFilterUI() {
     const sp = new URLSearchParams(window.location.search);
     const savedRegion = sp.get('region') || '';
     const savedDistrict = sp.get('district') || '';
-    const savedVillage = sp.get('village') || '';
-    if (savedRegion || savedDistrict || savedVillage) {
-        setRegionDistrict(savedRegion, savedDistrict, savedVillage, false);
+    if (savedRegion || savedDistrict) {
+        setRegionDistrict(savedRegion, savedDistrict, false);
     }
 }
 
@@ -547,7 +403,7 @@ function buildRegionModal() {
     modal.className = 'rd-modal';
     modal.innerHTML = `
         <div class="rd-modal-backdrop"></div>
-        <div class="rd-modal-box">
+        <div class="rd-modal-box rd-compact">
             <div class="rd-modal-head">
                 <h3><i class="fas fa-map-marker-alt"></i> Выберите место</h3>
                 <button class="rd-close" type="button" aria-label="Закрыть">&times;</button>
@@ -559,17 +415,10 @@ function buildRegionModal() {
                     <div class="rd-list" id="rdRegionsList"></div>
                 </div>
                 <div class="rd-col rd-districts">
-                    <div class="rd-col-title">Район / аильный округ</div>
-                    <div class="rd-search"><input type="text" id="rdDistrictSearch" placeholder="Поиск района..."></div>
+                    <div class="rd-col-title">Район / село</div>
+                    <div class="rd-search"><input type="text" id="rdDistrictSearch" placeholder="Поиск места..."></div>
                     <div class="rd-list" id="rdDistrictsList">
                         <div class="rd-empty">Сначала выберите регион</div>
-                    </div>
-                </div>
-                <div class="rd-col rd-villages">
-                    <div class="rd-col-title">Село</div>
-                    <div class="rd-search"><input type="text" id="rdVillageSearch" placeholder="Поиск села..."></div>
-                    <div class="rd-list" id="rdVillagesList">
-                        <div class="rd-empty">Сначала выберите район</div>
                     </div>
                 </div>
             </div>
@@ -584,11 +433,9 @@ function buildRegionModal() {
     const regionsList = modal.querySelector('#rdRegionsList');
     const regionSearchInput = modal.querySelector('#rdRegionSearch');
     const districtSearchInput = modal.querySelector('#rdDistrictSearch');
-    const villageSearchInput = modal.querySelector('#rdVillageSearch');
 
     let tempRegion = window.__regionDistrictFilter.region || '';
     let tempDistrict = window.__regionDistrictFilter.district || '';
-    let tempVillage = window.__regionDistrictFilter.village || '';
 
     const renderRegions = () => {
         const q = _normLoc(regionSearchInput?.value || '');
@@ -608,87 +455,55 @@ function buildRegionModal() {
         if (!region) { listEl.innerHTML = ''; return; }
         const q = _normLoc(districtSearchInput?.value || '');
         const filtered = region.districts.filter(d => !q || _normLoc(d).includes(q));
-        listEl.innerHTML = (!q ? `<div class="rd-item rd-item-all ${!tempDistrict ? 'active' : ''}" data-district="">Все районы</div>` : '') +
+        listEl.innerHTML = (!q ? `<div class="rd-item rd-item-all ${!tempDistrict ? 'active' : ''}" data-district="">Весь ${region.name}</div>` : '') +
             filtered.map(d => `<div class="rd-item ${tempDistrict === d ? 'active' : ''}" data-district="${d}">${d}</div>`).join('');
-        if (!filtered.length && q) listEl.innerHTML = '<div class="rd-empty">Ничего не найдено</div>';
-    };
-
-    const renderVillages = () => {
-        const listEl = modal.querySelector('#rdVillagesList');
-        if (!tempDistrict) {
-            listEl.innerHTML = `<div class="rd-empty">Сначала выберите район</div>`;
-            return;
-        }
-        const region = OSH_REGIONS.find(r => r.name === tempRegion);
-        if (!region) { listEl.innerHTML = ''; return; }
-        const q = _normLoc(villageSearchInput?.value || '');
-        // Все сёла кроме выбранного района
-        const villages = region.districts.filter(d => d !== tempDistrict);
-        const filtered = villages.filter(v => !q || _normLoc(v).includes(q));
-        listEl.innerHTML = (!q ? `<div class="rd-item rd-item-all ${!tempVillage ? 'active' : ''}" data-village="">Все сёла</div>` : '') +
-            filtered.map(v => `<div class="rd-item ${tempVillage === v ? 'active' : ''}" data-village="${v}">${v}</div>`).join('');
         if (!filtered.length && q) listEl.innerHTML = '<div class="rd-empty">Ничего не найдено</div>';
     };
 
     renderRegions();
     regionSearchInput?.addEventListener('input', renderRegions);
     districtSearchInput?.addEventListener('input', renderDistricts);
-    villageSearchInput?.addEventListener('input', renderVillages);
 
     regionsList.addEventListener('click', (e) => {
         const item = e.target.closest('.rd-item');
         if (!item) return;
         tempRegion = item.dataset.region || '';
         tempDistrict = '';
-        tempVillage = '';
         regionsList.querySelectorAll('.rd-item').forEach(el => el.classList.toggle('active', el === item));
         renderDistricts();
-        renderVillages();
     });
 
     modal.querySelector('#rdDistrictsList').addEventListener('click', (e) => {
         const item = e.target.closest('.rd-item');
         if (!item) return;
         tempDistrict = item.dataset.district || '';
-        tempVillage = '';
-        modal.querySelectorAll('#rdDistrictsList .rd-item').forEach(el => el.classList.toggle('active', el === item));
-        renderVillages();
-    });
-
-    modal.querySelector('#rdVillagesList').addEventListener('click', (e) => {
-        const item = e.target.closest('.rd-item');
-        if (!item) return;
-        tempVillage = item.dataset.village || '';
-        modal.querySelectorAll('#rdVillagesList .rd-item').forEach(el => el.classList.toggle('active', el === item));
+        item.parentElement.querySelectorAll('.rd-item').forEach(el => el.classList.toggle('active', el === item));
     });
 
     modal.querySelector('.rd-close').addEventListener('click', closeRegionModal);
     modal.querySelector('.rd-modal-backdrop').addEventListener('click', closeRegionModal);
-    modal._applyHandler = (r, d, v) => setRegionDistrict(r, d, v, true);
+    modal._applyHandler = (r, d) => setRegionDistrict(r, d, true);
     modal.querySelector('.rd-btn-reset').addEventListener('click', () => {
-        tempRegion = ''; tempDistrict = ''; tempVillage = '';
-        modal._applyHandler('', '', '');
+        tempRegion = ''; tempDistrict = '';
+        modal._applyHandler('', '');
         closeRegionModal();
     });
     modal.querySelector('.rd-btn-apply').addEventListener('click', () => {
-        modal._applyHandler(tempRegion, tempDistrict, tempVillage);
+        modal._applyHandler(tempRegion, tempDistrict);
         closeRegionModal();
     });
     // Экспонируем установку временного состояния извне
-    modal._setTemp = (r, d, v) => { tempRegion = r || ''; tempDistrict = d || ''; tempVillage = v || ''; };
+    modal._setTemp = (r, d) => { tempRegion = r || ''; tempDistrict = d || ''; };
 
     // Экспонируем для пересинхронизации при открытии
     modal._syncFromState = (override) => {
         const src = override || window.__regionDistrictFilter;
         tempRegion = src.region || '';
         tempDistrict = src.district || '';
-        tempVillage = src.village || '';
         if (regionSearchInput) regionSearchInput.value = '';
         if (districtSearchInput) districtSearchInput.value = '';
-        if (villageSearchInput) villageSearchInput.value = '';
         renderRegions();
         renderDistricts();
-        renderVillages();
     };
 }
 
@@ -714,15 +529,14 @@ function closeRegionModal() {
     document.body.style.overflow = '';
 }
 
-function setRegionDistrict(region, district, village, triggerApply) {
-    window.__regionDistrictFilter = { region: region || '', district: district || '', village: village || '' };
+function setRegionDistrict(region, district, triggerApply) {
+    window.__regionDistrictFilter = { region: region || '', district: district || '' };
     // Обновить кнопку
     const btn = document.getElementById('regionFilterBtn');
     if (btn) {
         const labelEl = btn.querySelector('.rf-btn-label');
         let text = 'Все регионы';
-        if (region && district && village) text = `${village}, ${district}, ${region}`;
-        else if (region && district) text = `${district}, ${region}`;
+        if (region && district) text = `${district}, ${region}`;
         else if (region) text = region;
         if (labelEl) labelEl.innerHTML = `<i class="fas fa-map-marker-alt" style="color:#ff6b35;margin-right:6px;"></i>${text}`;
     }
@@ -731,7 +545,6 @@ function setRegionDistrict(region, district, village, triggerApply) {
         const url = new URL(window.location.href);
         if (region) url.searchParams.set('region', region); else url.searchParams.delete('region');
         if (district) url.searchParams.set('district', district); else url.searchParams.delete('district');
-        if (village) url.searchParams.set('village', village); else url.searchParams.delete('village');
         history.replaceState({}, '', url.toString());
     } catch (e) {}
     // Триггер применения
@@ -741,14 +554,11 @@ function setRegionDistrict(region, district, village, triggerApply) {
     }
 }
 
-// Совпадает ли адрес объявления с выбранным регионом/районом/селом
+// Совпадает ли адрес объявления с выбранным регионом/районом
 function adMatchesRegionDistrict(ad) {
     const sel = window.__regionDistrictFilter || {};
-    if (!sel.region && !sel.district && !sel.village) return true;
+    if (!sel.region && !sel.district) return true;
     const addr = _normLoc(ad.address);
-    if (sel.village) {
-        return addr.includes(_normLoc(sel.village));
-    }
     if (sel.district) {
         return addr.includes(_normLoc(sel.district));
     }
@@ -1255,11 +1065,26 @@ function heroSearchGo() {
 }
 
 const SEARCH_SUGGESTIONS = [
-    // Подсказки из OSH_REGIONS (все айылы)
-    ...OSH_REGIONS.flatMap(region => 
-        region.districts.map(district => ({ label: `📍 ${district}`, value: district, type: 'район' }))
-    ),
-    // Улицы Оша
+    { label: '📍 Центр', value: 'Центр', type: 'район' },
+    { label: '📍 Масса', value: 'Масса', type: 'район' },
+    { label: '📍 Кенеш', value: 'Кенеш', type: 'район' },
+    { label: '📍 Тунгуч', value: 'Тунгуч', type: 'район' },
+    { label: '📍 Жибек Жолу', value: 'Жибек Жолу', type: 'район' },
+    { label: '📍 Батыра', value: 'Батыра', type: 'район' },
+    { label: '📍 Курманжан Датка', value: 'Курманжан Датка', type: 'район' },
+    { label: '📍 Площадь Ленина', value: 'Площадь Ленина', type: 'район' },
+    { label: '📍 Шахристан', value: 'Шахристан', type: 'район' },
+    { label: '📍 Нариман', value: 'Нариман', type: 'район' },
+    { label: '📍 Ак-Босого', value: 'Ак-Босого', type: 'район' },
+    { label: '📍 Достук', value: 'Достук', type: 'район' },
+    { label: '📍 Мирный', value: 'Мирный', type: 'район' },
+    { label: '📍 Черемушки', value: 'Черемушки', type: 'район' },
+    { label: '📍 Фуркат', value: 'Фуркат', type: 'район' },
+    { label: '📍 Пахтаабад', value: 'Пахтаабад', type: 'район' },
+    { label: '📍 Ташкентский', value: 'Ташкентский', type: 'район' },
+    { label: '📍 4-й микрорайон', value: '4 микрорайон', type: 'мкр' },
+    { label: '📍 5-й микрорайон', value: '5 микрорайон', type: 'мкр' },
+    { label: '📍 14-й микрорайон', value: '14 микрорайон', type: 'мкр' },
     { label: '🛣 ул. Ленина', value: 'ул. Ленина', type: 'улица' },
     { label: '🛣 ул. Масалиева', value: 'ул. Масалиева', type: 'улица' },
     { label: '🛣 ул. Токтогула', value: 'ул. Токтогула', type: 'улица' },
@@ -1278,7 +1103,6 @@ const SEARCH_SUGGESTIONS = [
     { label: '🛣 ул. Матери', value: 'ул. Матери', type: 'улица' },
     { label: '🛣 ул. Жамгыршиева', value: 'ул. Жамгыршиева', type: 'улица' },
     { label: '🛣 ул. Жукеева-Пудовкина', value: 'ул. Жукеева-Пудовкина', type: 'улица' },
-    // Типы недвижимости
     { label: '🏢 Квартиры', value: 'квартира', type: 'тип' },
     { label: '🏠 Дома', value: 'дом', type: 'тип' },
     { label: '🌿 Участки', value: 'участок', type: 'тип' },
@@ -1286,7 +1110,7 @@ const SEARCH_SUGGESTIONS = [
     { label: '🛏 1-комнатная квартира', value: '1-комнатная', type: 'тип' },
     { label: '🛏 2-комнатная квартира', value: '2-комнатная', type: 'тип' },
     { label: '🛏 3-комнатная квартира', value: '3-комнатная', type: 'тип' },
-    { label: '🛏 4-комнатная квартира', value: '4-комнатная', type: 'тип' }
+    { label: '🛏 4-комнатная квартира', value: '4-комнатная', type: 'тип' },
 ];
 
 function initSearchSuggestions(inputId, onSelect) {
@@ -1830,55 +1654,6 @@ function renderDetails() {
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
         L.marker([lat, lng]).addTo(map);
     }
-
-    // Кнопка "Показать на карте"
-    const showMapBtn = document.getElementById("showMapBtn");
-    showMapBtn?.addEventListener("click", async () => {
-        const mapModal = document.getElementById("mapModal");
-        if (!mapModal) return;
-        
-        mapModal.style.display = "block";
-        
-        // Если есть координаты, используем их
-        if (ad.lat && ad.lng) {
-            const lat = Number(ad.lat);
-            const lng = Number(ad.lng);
-            setTimeout(() => {
-                const map = L.map("mapModalView").setView([lat, lng], 14);
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
-                L.marker([lat, lng]).addTo(map);
-            }, 100);
-        } else {
-            // Геокодирование адреса
-            const address = ad.address || "Ош, Кыргызстан";
-            try {
-                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`);
-                const data = await response.json();
-                if (data && data.length > 0) {
-                    const lat = Number(data[0].lat);
-                    const lng = Number(data[0].lon);
-                    setTimeout(() => {
-                        const map = L.map("mapModalView").setView([lat, lng], 14);
-                        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
-                        L.marker([lat, lng]).addTo(map);
-                    }, 100);
-                } else {
-                    showToast("Не удалось найти адрес на карте", "error");
-                    mapModal.style.display = "none";
-                }
-            } catch (error) {
-                showToast("Ошибка при загрузке карты", "error");
-                mapModal.style.display = "none";
-            }
-        }
-    });
-
-    // Закрытие модального окна карты при клике на backdrop
-    document.getElementById("mapModal")?.addEventListener("click", (e) => {
-        if (e.target.id === "mapModal") {
-            e.target.style.display = "none";
-        }
-    });
 
     const reportBtn = document.getElementById("reportAdBtn");
     reportBtn?.addEventListener("click", () => {
