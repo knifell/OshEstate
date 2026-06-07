@@ -1256,17 +1256,10 @@ function heroSearchGo() {
 
 const SEARCH_SUGGESTIONS = [
     // Подсказки из OSH_REGIONS (все айылы)
-];
-
-// Добавляем все айылы из OSH_REGIONS в SEARCH_SUGGESTIONS
-OSH_REGIONS.forEach(region => {
-    region.districts.forEach(district => {
-        SEARCH_SUGGESTIONS.push({ label: `📍 ${district}`, value: district, type: 'район' });
-    });
-});
-
-// Добавляем улицы Оша
-SEARCH_SUGGESTIONS.push(
+    ...OSH_REGIONS.flatMap(region => 
+        region.districts.map(district => ({ label: `📍 ${district}`, value: district, type: 'район' }))
+    ),
+    // Улицы Оша
     { label: '🛣 ул. Ленина', value: 'ул. Ленина', type: 'улица' },
     { label: '🛣 ул. Масалиева', value: 'ул. Масалиева', type: 'улица' },
     { label: '🛣 ул. Токтогула', value: 'ул. Токтогула', type: 'улица' },
@@ -1294,7 +1287,7 @@ SEARCH_SUGGESTIONS.push(
     { label: '🛏 2-комнатная квартира', value: '2-комнатная', type: 'тип' },
     { label: '🛏 3-комнатная квартира', value: '3-комнатная', type: 'тип' },
     { label: '🛏 4-комнатная квартира', value: '4-комнатная', type: 'тип' }
-);
+];
 
 function initSearchSuggestions(inputId, onSelect) {
     const input = document.getElementById(inputId);
@@ -2185,9 +2178,6 @@ function initAddPageForm() {
 
     typeSelect?.addEventListener("change", updateCategoryFields);
     updateCategoryFields();
-
-    // Инициализация подсказок для адреса
-    initSearchSuggestions('inputAddress');
 
     // --- Авто-формат и валидация телефона ---
     const phoneInputEl = document.getElementById('inputPhone');
@@ -5471,7 +5461,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mountLayout();
         updateAuthNav();
         initMenu();
-        initSmartSearch();
     
         // Read URL params for buy.html (sale page) and pre-fill filters
         if (document.body?.getAttribute('data-page') === 'sale') {
